@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExploreAI - Temukan Tempat Impianmu</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0A1E16 0%, #1C3A30 100%);
+            color: #CFFFE0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 10px 30px rgba(15, 143, 110, 0.5); }
+            50% { box-shadow: 0 10px 50px rgba(15, 143, 110, 0.8); }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Header */
+        .header {
+            background: rgba(10, 30, 22, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(15, 143, 110, 0.2);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0F8F6E, #CFFFE0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 2rem;
+            text-align: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #CFFFE0, #0F8F6E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 0.8s;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s 0.2s both;
+        }
+
+        /* Mood Selector */
+        .mood-selector {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s 0.4s both;
+        }
+
+        .mood-btn {
+            background: rgba(15, 143, 110, 0.1);
+            border: 2px solid #0F8F6E;
+            color: #CFFFE0;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .mood-btn:hover {
+            background: #0F8F6E;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(15, 143, 110, 0.3);
+        }
+
+        /* Filters Container */
+        .filters {
+            background: rgba(28, 58, 48, 0.5);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 1000px;
+            margin: 0 auto 3rem;
+            border: 1px solid rgba(15, 143, 110, 0.2);
+            animation: fadeInUp 0.8s 0.6s both;
+        }
+
+        /* --- SEARCH BAR STYLING (NEW) --- */
+        .search-container {
+            margin-bottom: 2rem;
+            position: relative;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3.5rem;
+            background: rgba(10, 30, 22, 0.8);
+            border: 2px solid #0F8F6E;
+            border-radius: 50px;
+            color: #CFFFE0;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(15, 143, 110, 0.4);
+            background: rgba(10, 30, 22, 0.95);
+            transform: scale(1.01);
+        }
+
+        .search-input::placeholder {
+            color: rgba(207, 255, 224, 0.5);
+        }
+
+        .search-icon-ui {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        /* ------------------------------- */
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            color: #CFFFE0;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            background: rgba(10, 30, 22, 0.8);
+            border: 1px solid #0F8F6E;
+            color: #CFFFE0;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .filter-group input[type="range"] {
+            accent-color: #0F8F6E;
+        }
+
+        .range-value {
+            color: #0F8F6E;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Places Grid */
+        .places-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .place-card {
+            background: rgba(28, 58, 48, 0.5);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(15, 143, 110, 0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+            animation: fadeInUp 0.5s;
+        }
+
+        .place-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(15, 143, 110, 0.3);
+            border-color: #0F8F6E;
+        }
+
+        .card-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .fav-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(10, 30, 22, 0.9);
+            border: none;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .fav-btn:hover { transform: scale(1.1); }
+
+        .category-badge {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            background: rgba(15, 143, 110, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .card-content { padding: 1.5rem; }
+
+        .card-content h3 {
+            color: #CFFFE0;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .card-info {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.9rem;
+            color: #0F8F6E;
+        }
+
+        .card-desc {
+            color: rgba(207, 255, 224, 0.8);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(15, 143, 110, 0.2);
+        }
+
+        .price {
+            color: #0F8F6E;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .hours {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.85rem;
+            color: rgba(207, 255, 224, 0.7);
+        }
+
+        /* AI Chat Button & Panel */
+        .ai-chat-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: linear-gradient(135deg, #0F8F6E, #1C3A30);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(15, 143, 110, 0.5);
+            transition: all 0.3s;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+
+        .ai-chat-btn:hover { transform: scale(1.1); }
+
+        .ai-panel {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            max-width: 400px;
+            height: 600px;
+            background: rgba(10, 30, 22, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid #0F8F6E;
+            border-radius: 20px 20px 0 0;
+            display: none;
+            flex-direction: column;
+            z-index: 1001;
+            animation: slideUp 0.3s;
+        }
+
+        .ai-panel.active { display: flex; }
+
+        .ai-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(15, 143, 110, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ai-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #0F8F6E;
+        }
+
+        .ai-close {
+            background: none;
+            border: none;
+            color: #CFFFE0;
+            cursor: pointer;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .ai-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .ai-message {
+            padding: 1rem;
+            border-radius: 15px;
+            max-width: 80%;
+            animation: fadeIn 0.3s;
+            /* Allow HTML rendering inside message */
+        }
+        
+        /* CSS untuk elemen HTML di dalam AI response */
+        .ai-message p { margin-bottom: 0.5rem; }
+        .ai-message ul { padding-left: 1.2rem; margin-bottom: 0.5rem; }
+        .ai-message strong { color: #fff; }
+
+        .ai-message.user {
+            background: rgba(15, 143, 110, 0.2);
+            align-self: flex-end;
+            border: 1px solid #0F8F6E;
+        }
+
+        .ai-message.assistant {
+            background: rgba(28, 58, 48, 0.5);
+            align-self: flex-start;
+            border: 1px solid rgba(15, 143, 110, 0.2);
+        }
+
+        .ai-input-area {
+            padding: 1.5rem;
+            border-top: 1px solid rgba(15, 143, 110, 0.2);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .ai-input-area input {
+            flex: 1;
+            background: rgba(28, 58, 48, 0.5);
+            border: 1px solid #0F8F6E;
+            color: #CFFFE0;
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .ai-send-btn {
+            background: #0F8F6E;
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            color: white;
+            font-weight: 600;
+        }
+
+        .ai-send-btn:hover {
+            background: #0C7A5C;
+            transform: scale(1.05);
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 0.3rem;
+            padding: 1rem;
+            align-self: flex-start;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #0F8F6E;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(10, 30, 22, 0.9);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal-content {
+            background: rgba(28, 58, 48, 0.95);
+            border: 1px solid #0F8F6E;
+            border-radius: 20px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: zoomIn 0.3s;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(10, 30, 22, 0.9);
+            border: 1px solid #0F8F6E;
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            z-index: 10;
+            color: #CFFFE0;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-header {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .modal-header-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(10, 30, 22, 0.9));
+            padding: 2rem 2rem 1rem;
+        }
+
+        .modal-header-overlay h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .modal-body { padding: 2rem; }
+
+        .modal-desc {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .modal-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-box {
+            background: rgba(15, 143, 110, 0.1);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 1px solid rgba(15, 143, 110, 0.3);
+        }
+
+        .info-box strong {
+            display: block;
+            margin-bottom: 0.3rem;
+            margin-top: 0.5rem;
+        }
+
+        .info-box p { opacity: 0.8; }
+
+        .services-section { margin-bottom: 2rem; }
+
+        .services-section h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            color: #0F8F6E;
+        }
+
+        .services-list {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .service-tag {
+            background: rgba(15, 143, 110, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            border: 1px solid #0F8F6E;
+        }
+
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #0F8F6E, #0C7A5C);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(15, 143, 110, 0.4);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            opacity: 0.6;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            .mood-btn { padding: 0.8rem 1.5rem; font-size: 1rem; }
+            .ai-panel { max-width: 100%; }
+            .places-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span>✨</span> ExploreAI
+            </div>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>Temukan Tempat Impianmu dengan AI</h1>
+        <p>Spa, Kuliner, dan Wisata Terdekat dengan Rekomendasi Personal AI</p>
+
+        <div class="mood-selector">
+            <button class="mood-btn" onclick="handleMoodSearch('stress')">😭 Stress</button>
+            <button class="mood-btn" onclick="handleMoodSearch('santai')">😌 Santai</button>
+            <button class="mood-btn" onclick="handleMoodSearch('capek')">😴 Capek</button>
+            <button class="mood-btn" onclick="handleMoodSearch('lapar')">🤤 Lapar</button>
+            <button class="mood-btn" onclick="handleMoodSearch('jalan')">🧭 Jalan-jalan</button>
+        </div>
+
+        <div class="filters">
+            
+            <div class="search-container">
+                <span class="search-icon-ui">🔍</span>
+                <input type="text" 
+                       id="searchInput" 
+                       class="search-input" 
+                       placeholder="Cari nama tempat, menu, atau aktivitas..." 
+                       oninput="handleSearch(this.value)">
+            </div>
+
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label>Radius: <span class="range-value" id="radiusValue">10 km</span></label>
+                    <input type="range" id="radiusSlider" min="1" max="50" value="10" onchange="updateFilters()">
+                </div>
+                <div class="filter-group">
+                    <label>Kategori</label>
+                    <select id="categorySelect" onchange="updateFilters()">
+                        <option value="all">Semua</option>
+                        <option value="spa">Spa</option>
+                        <option value="food">Kuliner</option>
+                        <option value="tourism">Wisata</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Budget: <span class="range-value" id="budgetValue">Rp 1.000.000</span></label>
+                    <input type="range" id="budgetSlider" min="10000" max="1000000" step="10000" value="1000000"
+                        onchange="updateFilters()">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="places-grid" id="placesGrid"></div>
+
+    <div class="empty-state" id="emptyState" style="display: none;">
+        <div style="font-size: 4rem; margin-bottom: 1rem;">📍</div>
+        <h3>Tidak ada tempat yang sesuai</h3>
+        <p>Coba perluas pencarian atau ubah kata kunci Anda</p>
+    </div>
+
+    <button class="ai-chat-btn" onclick="toggleAIPanel()">
+        <span style="font-size: 2rem;">✨</span>
+    </button>
+
+    <div class="ai-panel" id="aiPanel">
+        <div class="ai-header">
+            <h3><span style="font-size: 1.5rem;">✨</span> AI Assistant</h3>
+            <button class="ai-close" onclick="toggleAIPanel()">×</button>
+        </div>
+        <div class="ai-messages" id="aiMessages">
+            <div style="text-align: center; opacity: 0.6; margin-top: 2rem;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">✨</div>
+                <p>Halo! Saya siap membantu Anda menemukan tempat terbaik. Tanyakan apa saja!</p>
+            </div>
+        </div>
+        <div class="ai-input-area">
+            <input type="text" id="aiInput" placeholder="Tanya AI..." onkeypress="handleAIKeyPress(event)">
+            <button class="ai-send-btn" id="aiSendBtn" onclick="handleAISubmit()">Kirim</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div class="modal-header" id="modalHeader">
+                <div class="modal-header-overlay">
+                    <h2 id="modalTitle"></h2>
+                    <div class="modal-rating">
+                        <span style="color: #FFD700;">⭐</span>
+                        <span id="modalRating"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc" id="modalDesc"></p>
+                <div class="modal-info-grid">
+                    <div class="info-box">
+                        <span style="font-size: 1.5rem;">📍</span>
+                        <strong>Jarak</strong>
+                        <p id="modalDistance"></p>
+                    </div>
+                    <div class="info-box">
+                        <span style="font-size: 1.5rem;">💰</span>
+                        <strong>Harga</strong>
+                        <p id="modalPrice"></p>
+                    </div>
+                    <div class="info-box">
+                        <span style="font-size: 1.5rem;">🕐</span>
+                        <strong>Jam Buka</strong>
+                        <p id="modalHours"></p>
+                    </div>
+                </div>
+                <div class="services-section">
+                    <h4>Layanan Tersedia</h4>
+                    <div class="services-list" id="modalServices"></div>
+                </div>
+                <a href="#" class="btn-primary" id="modalMailto">
+                    🔍 Cari di Google
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- DATA TEMPAT (Sama seperti sebelumnya) ---
+        const places = [
+            {
+                id: 1,
+                name: "Emerald Spa & Wellness",
+                category: "spa",
+                lat: -7.8753,
+                lng: 112.0101,
+                price: 150000,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400",
+                description: "Spa premium dengan terapi aromaterapi dan massage tradisional",
+                openHours: "09:00-21:00",
+                services: ["Aromatherapy", "Thai Massage", "Facial Treatment"]
+            },
+            {
+                id: 2,
+                name: "Warung Nasi Pecel Bu Kaji",
+                category: "food",
+                lat: -7.8723,
+                lng: 112.0145,
+                price: 15000,
+                rating: 4.6,
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWTgR0-0OXgnzlpisff5G0eXHmNYdx11TTiA&s",
+                description: "Kuliner lokal autentik dengan cita rasa tradisional",
+                openHours: "06:00-14:00",
+                services: ["Nasi Pecel", "Rawon", "Soto"]
+            },
+            {
+                id: 3,
+                name: "Air Terjun Coban Rondo",
+                category: "tourism",
+                lat: -7.8950,
+                lng: 112.0550,
+                price: 25000,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400",
+                description: "Destinasi wisata alam dengan pemandangan air terjun yang menakjubkan",
+                openHours: "07:00-17:00",
+                services: ["Trekking", "Photography Spot", "Camping Area"]
+            },
+            {
+                id: 4,
+                name: "Relaxation Heaven Spa",
+                category: "spa",
+                lat: -7.8800,
+                lng: 112.0200,
+                price: 200000,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400",
+                description: "Spa mewah dengan pemandangan gunung",
+                openHours: "10:00-22:00",
+                services: ["Hot Stone", "Body Scrub", "Jacuzzi"]
+            },
+            {
+                id: 5,
+                name: "Sate Kelinci Pak Budi",
+                category: "food",
+                lat: -7.8700,
+                lng: 112.0180,
+                price: 35000,
+                rating: 4.5,
+                image: "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=400",
+                description: "Sate kelinci legendaris dengan bumbu kacang spesial",
+                openHours: "11:00-21:00",
+                services: ["Sate Kelinci", "Sate Ayam", "Tongseng"]
+            },
+            {
+                id: 6,
+                name: "Taman Rekreasi Selecta",
+                category: "tourism",
+                lat: -7.8650,
+                lng: 112.0480,
+                price: 30000,
+                rating: 4.6,
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIprqBQb-m12QP_O8_ZD1G-U3aI4hwbzPA2w&s",
+                description: "Taman rekreasi keluarga dengan kolam renang dan taman bunga",
+                openHours: "08:00-18:00",
+                services: ["Swimming Pool", "Flower Garden", "Playground"]
+            },
+            {
+                id: 7,
+                name: "Cafe Latte Art",
+                category: "food",
+                lat: -7.8680,
+                lng: 112.0120,
+                price: 45000,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400",
+                description: "Cafe modern dengan kopi specialty dan dessert lezat",
+                openHours: "08:00-22:00",
+                services: ["Coffee", "Dessert", "Breakfast"]
+            },
+            {
+                id: 8,
+                name: "Wellness Center Harmoni",
+                category: "spa",
+                lat: -7.8820,
+                lng: 112.0250,
+                price: 180000,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=400",
+                description: "Pusat wellness dengan yoga dan meditasi",
+                openHours: "07:00-20:00",
+                services: ["Yoga", "Meditation", "Massage"]
+            },
+            {
+                id: 17,
+                name: "Monumen Simpang Lima Gumul",
+                category: "tourism",
+                lat: -7.9265,
+                lng: 112.0976,
+                price: 0,
+                rating: 4.7,
+                image: "data:image/jpeg;base64,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",
+                description: "Wisata dengan suasana seperti di Korea",
+                openHours: "08:00-17:00",
+                services: ["Spot Foto", "Sewa Hanbok"]
+            },
+            {
+                id: 43,
+                name: "Kraton Waterpark",
+                category: "tourism",
+                lat: -7.8800,
+                lng: 112.0500,
+                price: 35000,
+                rating: 4.5,
+                image: "https://akcdn.detik.net.id/community/media/visual/2021/10/26/kraton-waterpark.jpeg?w=700&q=90",
+                description: "Waterpark dengan berbagai wahana seru",
+                openHours: "09:00-17:00",
+                services: ["Waterpark", "Kolam Renang"]
+            },
+            {
+                id: 44,
+                name: "Warung Sate Pak Siboen",
+                category: "food",
+                lat: -7.8400,
+                lng: 112.0150,
+                price: 25000,
+                rating: 4.7,
+                image: "data:image/jpeg;base64,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

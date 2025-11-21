@@ -13,6 +13,9 @@
             --dark: #0A1E16;
             --light: #CFFFE0;
             --accent: #FFD700;
+            /* Tambahan untuk Chat AI */
+            --user-bubble: #175747;
+            --ai-bubble: #0A1E16;
         }
 
         * {
@@ -29,7 +32,102 @@
             overflow-x: hidden;
         }
 
-        /* --- HEADER --- */
+        /* --- SEARCH & DELIVERY STYLES (NEW) --- */
+        .search-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            background: rgba(10, 30, 22, 0.6);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            background: rgba(10, 30, 22, 0.9);
+            box-shadow: 0 0 15px rgba(15, 143, 110, 0.4);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+
+        .delivery-toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(15, 143, 110, 0.15);
+            padding: 0.8rem;
+            border-radius: 10px;
+            border: 1px solid rgba(15, 143, 110, 0.3);
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+
+        .delivery-toggle-container:hover {
+            background: rgba(15, 143, 110, 0.25);
+        }
+
+        /* Toggle Switch CSS */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--primary);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(24px);
+        }
+
+        /* --- EXISTING STYLES --- */
         .header {
             background: rgba(10, 30, 22, 0.9);
             backdrop-filter: blur(20px);
@@ -38,9 +136,6 @@
             top: 0;
             z-index: 100;
             border-bottom: 1px solid rgba(15, 143, 110, 0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
         .logo {
@@ -51,9 +146,8 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* --- HERO & SEARCH --- */
         .hero {
-            padding: 4rem 2rem 2rem;
+            padding: 4rem 2rem;
             text-align: center;
             max-width: 1400px;
             margin: 0 auto;
@@ -70,51 +164,15 @@
             backdrop-filter: blur(20px);
             padding: 2rem;
             border-radius: 20px;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto 3rem;
             border: 1px solid rgba(15, 143, 110, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        }
-
-        /* SEARCH BAR STYLING */
-        .search-wrapper {
-            position: relative;
-            margin-bottom: 1.5rem;
-            width: 100%;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 1.2rem 1.2rem 1.2rem 3.5rem;
-            background: rgba(10, 30, 22, 0.8);
-            border: 2px solid var(--primary);
-            border-radius: 12px;
-            color: white;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-        }
-
-        .search-input:focus {
-            outline: none;
-            background: rgba(10, 30, 22, 1);
-            box-shadow: 0 0 20px rgba(15, 143, 110, 0.6);
-            border-color: var(--light);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 1.2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.4rem;
-            opacity: 0.8;
         }
 
         .filter-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
-            align-items: end;
         }
 
         .filter-group label {
@@ -122,46 +180,41 @@
             margin-bottom: 0.5rem;
             font-weight: 600;
             color: var(--primary);
-            text-align: left;
         }
 
         .filter-group select,
         .filter-group input[type="range"] {
             width: 100%;
-            padding: 0.8rem;
+            padding: 0.5rem;
             background: rgba(10, 30, 22, 0.8);
             border: 1px solid var(--primary);
             color: white;
             border-radius: 8px;
-            font-size: 1rem;
         }
 
-        /* --- CARDS --- */
         .places-grid {
             max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 2rem;
         }
 
         .place-card {
-            background: rgba(28, 58, 48, 0.6);
+            background: rgba(28, 58, 48, 0.5);
             border-radius: 20px;
             overflow: hidden;
             border: 1px solid rgba(15, 143, 110, 0.2);
             transition: all 0.3s;
             cursor: pointer;
             position: relative;
-            display: flex;
-            flex-direction: column;
         }
 
         .place-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             border-color: var(--primary);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
 
         .card-image {
@@ -171,29 +224,39 @@
             position: relative;
         }
 
+        .delivery-icon {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #25D366;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
         .category-badge {
             position: absolute;
             bottom: 10px;
             right: 10px;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 6px 12px;
-            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 4px 10px;
+            border-radius: 12px;
             font-size: 0.8rem;
-            font-weight: 600;
-            border: 1px solid var(--primary);
         }
 
         .card-content {
             padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
         }
 
         .card-content h3 {
             margin-bottom: 0.5rem;
             color: var(--light);
-            font-size: 1.25rem;
         }
 
         .card-info {
@@ -202,46 +265,32 @@
             color: var(--primary);
             font-size: 0.9rem;
             margin-bottom: 1rem;
-            font-weight: 600;
         }
 
         .card-desc {
             font-size: 0.9rem;
             opacity: 0.8;
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
-            flex-grow: 1;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .price {
-            color: var(--accent);
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        /* --- MODAL --- */
+        /* Modal Styles */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.8);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 2000;
             opacity: 0;
             transition: opacity 0.3s;
-            padding: 1rem;
         }
 
         .modal-overlay.active {
@@ -251,7 +300,7 @@
 
         .modal-content {
             background: #1C3A30;
-            width: 100%;
+            width: 90%;
             max-width: 500px;
             border-radius: 20px;
             overflow: hidden;
@@ -259,7 +308,6 @@
             position: relative;
             transform: scale(0.8);
             transition: transform 0.3s;
-            box-shadow: 0 0 50px rgba(15, 143, 110, 0.2);
         }
 
         .modal-overlay.active .modal-content {
@@ -280,51 +328,54 @@
             position: absolute;
             top: 15px;
             right: 15px;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.5);
             border: none;
             color: white;
-            width: 36px;
-            height: 36px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
+            font-size: 1.2rem;
         }
 
-        .modal-close:hover {
-            background: var(--primary);
-        }
-
-        .service-tag {
-            display: inline-block;
-            background: rgba(15, 143, 110, 0.2);
-            padding: 4px 10px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            margin-right: 5px;
-            margin-bottom: 5px;
-            border: 1px solid var(--primary);
+        .modal-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
 
         .btn-action {
-            display: block;
-            width: 100%;
-            padding: 1rem;
-            background: var(--primary);
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 12px;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 10px;
             font-weight: 600;
-            margin-top: 1rem;
-            transition: background 0.2s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: transform 0.2s;
         }
 
         .btn-action:hover {
-            background: #0B6E54;
+            transform: translateY(-2px);
+        }
+
+        .btn-delivery {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-google {
+            background: #4285F4;
+            color: white;
+        }
+
+        .btn-full {
+            grid-column: 1 / -1;
         }
 
         /* Empty State */
@@ -332,12 +383,188 @@
             text-align: center;
             padding: 4rem 2rem;
             display: none;
-            color: rgba(255,255,255,0.6);
+        }
+
+        /* --- CHAT AI STYLES (PENAMBAHAN) --- */
+        .ai-fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--accent);
+            color: var(--dark);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s, background-color 0.2s;
+            z-index: 1000;
+        }
+
+        .ai-fab:hover {
+            transform: scale(1.05);
+            background-color: #ffe033;
+        }
+
+        .ai-panel {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 90%;
+            max-width: 350px;
+            height: 450px;
+            background-color: #0A1E16;
+            border: 2px solid var(--primary);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transform: scale(0.9);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s, opacity 0.3s;
+            z-index: 999;
+        }
+
+        .ai-panel.active {
+            transform: scale(1);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .ai-header {
+            padding: 1rem;
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ai-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .ai-chatbox {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #1C3A30;
+        }
+
+        .ai-chatbox::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .ai-chatbox::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .ai-message {
+            max-width: 85%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            white-space: pre-wrap; /* Penting untuk format hasil */
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: var(--user-bubble);
+            border-bottom-right-radius: 2px;
+        }
+
+        .assistant-message {
+            align-self: flex-start;
+            background-color: var(--ai-bubble);
+            border: 1px solid rgba(15, 143, 110, 0.5);
+            border-bottom-left-radius: 2px;
+        }
+
+        .typing-indicator {
+            align-self: flex-start;
+            background-color: var(--ai-bubble);
+            padding: 10px 15px;
+            border-radius: 15px;
+            color: var(--light);
+            font-style: italic;
+        }
+
+        .ai-input-container {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid var(--primary);
+            background-color: var(--ai-bubble);
+        }
+
+        .ai-input {
+            flex-grow: 1;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 8px;
+            margin-right: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            resize: none;
+            height: 40px;
+        }
+
+        .ai-input:focus {
+            outline: none;
+        }
+
+        .ai-send-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-weight: bold;
+        }
+
+        .ai-send-btn:hover {
+            background-color: #0c7a5e;
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .filter-grid { grid-template-columns: 1fr; }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+            /* Penyesuaian untuk tampilan mobile */
+            .ai-panel {
+                width: 100%;
+                max-width: none;
+                height: calc(100% - 70px);
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
+            }
+            .ai-fab {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                bottom: 10px;
+                right: 10px;
+            }
         }
     </style>
 </head>
@@ -348,20 +575,26 @@
     </header>
 
     <div class="hero">
-        <h1>Jelajahi Wisata & Kuliner</h1>
-        <p>Temukan hidden gem di Kediri, dari spa relaksasi hingga kuliner legendaris.</p>
+        <h1>Temukan & Pesan Kuliner Favorit</h1>
+        <p>Jelajahi wisata dan kuliner terbaik di Kediri dengan mudah.</p>
 
         <div class="filters">
             <div class="search-wrapper">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" class="search-input" 
-                       placeholder="Cari nama tempat, jenis makanan, atau layanan..." 
-                       oninput="handleSearch()">
+                <input type="text" id="searchInput" class="search-input" placeholder="Cari nasi pecel, soto, atau tempat wisata..." oninput="handleSearch()">
+            </div>
+
+            <div class="delivery-toggle-container" onclick="document.getElementById('deliveryCheck').click()">
+                <label class="switch">
+                    <input type="checkbox" id="deliveryCheck" onchange="updateFilters()">
+                    <span class="slider"></span>
+                </label>
+                <span>🛵 Hanya Tampilkan yang Bisa <b>Delivery / Pesan Antar</b></span>
             </div>
 
             <div class="filter-grid">
                 <div class="filter-group">
-                    <label>Jarak Maksimal: <span id="radiusValue">20 km</span></label>
+                    <label>Jarak Maksimal: <span id="radiusValue">10 km</span></label>
                     <input type="range" id="radiusSlider" min="1" max="50" value="20" oninput="updateFilters()">
                 </div>
                 <div class="filter-group">
@@ -382,7 +615,7 @@
     <div class="empty-state" id="emptyState">
         <div style="font-size: 4rem; margin-bottom: 1rem;">😕</div>
         <h3>Tidak ditemukan tempat yang cocok</h3>
-        <p>Coba ubah kata kunci pencarian atau atur ulang filter Anda.</p>
+        <p>Coba ubah kata kunci pencarian atau filter Anda.</p>
     </div>
 
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
@@ -391,22 +624,440 @@
             <div class="modal-header-img" id="modalImage"></div>
             <div class="modal-body">
                 <h2 id="modalTitle" style="margin-bottom: 0.5rem; color: #CFFFE0;"></h2>
-                <div style="color: #FFD700; margin-bottom: 1rem; font-weight: bold;">
-                    <span id="modalRating"></span> • <span id="modalPrice"></span>
+                <div class="modal-rating" style="color: #FFD700; margin-bottom: 1rem;">
+                    <span id="modalStar"></span> • <span id="modalPrice"></span>
                 </div>
+                <p id="modalDesc" style="line-height: 1.6; margin-bottom: 1.5rem; color: rgba(255,255,255,0.8);"></p>
                 
-                <div style="margin-bottom: 1rem;" id="modalServices"></div>
-
-                <p id="modalDesc" style="line-height: 1.6; margin-bottom: 1.5rem; color: rgba(255,255,255,0.9);"></p>
-                
-                <div style="background: rgba(10, 30, 22, 0.6); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem; font-size: 0.9rem;">
-                    <div style="margin-bottom: 0.5rem;"><strong>📍 Jarak:</strong> <span id="modalDistance"></span></div>
-                    <div><strong>🕒 Jam Buka:</strong> <span id="modalHours"></span></div>
+                <div style="background: rgba(15,143,110,0.2); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                    <strong>📍 Jarak:</strong> <span id="modalDistance"></span><br>
+                    <strong>🕒 Jam Buka:</strong> <span id="modalHours"></span>
                 </div>
 
-                <a href="#" id="btnGoogle" target="_blank" class="btn-action">🗺️ Buka di Google Maps</a>
+                <div class="modal-actions" id="modalActions">
+                    </div>
             </div>
+        </div>
+    </div>
+    
+    <button class="ai-fab" id="aiFab" onclick="toggleAIPanel()">💬</button>
+
+    <div class="ai-panel" id="aiPanel">
+        <div class="ai-header">
+            <span>✨ Chat AI Helper</span>
+            <button class="ai-close" onclick="toggleAIPanel()">×</button>
+        </div>
+        <div class="ai-chatbox" id="aiChatbox">
+            <div class="ai-message assistant-message">
+                Halo! Saya ExploreAI Helper. 
+                <br>Coba tanyakan "tempat spa dekat sini" atau "wisata alam terbaik"!
+            </div>
+        </div>
+        <div class="ai-input-container">
+            <textarea id="aiInput" class="ai-input" placeholder="Kirim searching Anda..." onkeypress="handleAIKeyPress(event)"></textarea>
+            <button class="ai-send-btn" onclick="handleAISubmit()">Kirim</button>
         </div>
     </div>
 
     <script>
+        // --- DATA ---
+        // Menambahkan properti 'phone' untuk simulasi WhatsApp Delivery
+        const places = [
+            {
+                id: 2,
+                name: "Warung Nasi Pecel Bu Kaji",
+                category: "food",
+                lat: -7.8723, lng: 112.0145,
+                price: 15000, rating: 4.6,
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWTgR0-0OXgnzlpisff5G0eXHmNYdx11TTiA&s",
+                description: "Kuliner lokal autentik dengan cita rasa tradisional. Bumbu kacangnya legendaris.",
+                openHours: "06:00-14:00",
+                phone: "6281234567890", // Dummy phone
+                services: ["Nasi Pecel", "Rawon", "Soto"]
+            },
+            {
+                id: 37,
+                name: "Nasi Pecel Mbah Darmo 1",
+                category: "food",
+                lat: -7.8380, lng: 112.0060,
+                price: 20000, rating: 4.6,
+                image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMWFhUXFx0XGRgYGBsaHRkYHx8XGhoaHR0aHiggHR0lHxoXITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGi0mHiUtLS0tMC0tLS81LS8tLS0tLS0vLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAKwBJgMBIgACEQEDEQH/xAAcAAACAwEBAQEAAAAAAAAAAAAEBQIDBgcAAQj/xABBEAABAgQEAwUHAwMCBQQDAAABAhEAAyExBAUSQVFhcQYTIjKBkaGxwdHwFFLhYvEjM3KCkhXTBxY0c6Ky0v8/8QAGQEAAwEBAQAAAAAAAAAAAAAAAgMEAQUA/8QALBEAAgICAgEEAQIGAwAAAAAAAQIAAxEhEjEEEyJBUWEycQUUI0KR0YGh8f/aAAwDAQACEQMRAD8Aab6EEOtYSQXKjf+coXYnNEpVqlCvxqTU8wmw6wgm40qLqL/zaIf1EcwsMYlQXPcNnTyokqJJNyTFfeQRkuR4jFKaWnw7rV7I89+gjpWU9jMNJSNSda91kkf8ASAafWGV1s0FmC6nK5sxUpQJIB3Sbtz4ecN8JmAIrGyx3/DzBLNO8Q/wqcV5KeM5nPZX+lkmYidq0q06Cmpbd34VtBlSpi8ctiV4aeNSkvwUOiv3BiU/CSVpUlctJCn1UY1uyksQebxnRmAC0FSSk2cc+XUcd4...`,
+                description: "Kuliner pedas khas Kediri. Pilihan lauk beragam.",
+                openHours: "09:00-21:00",
+                services: ["Nasi Pecel", "Sayur Lodeh", "Jus Buah"]
+            },
+            {
+                id: 3,
+                name: "Air Terjun Dolo",
+                category: "tourism",
+                lat: -7.8600, lng: 112.0250,
+                price: 25000, rating: 4.7,
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400",
+                description: "Destinasi wisata alam dengan pemandangan air terjun yang menakjubkan",
+                openHours: "07:00-17:00",
+                services: ["Trekking", "Photography Spot", "Camping Area"]
+            },
+            {
+                id: 4,
+                name: "Relaxation Heaven Spa",
+                category: "spa",
+                lat: -7.8800, lng: 112.0200,
+                price: 200000, rating: 4.9,
+                image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400",
+                description: "Spa mewah dengan pemandangan gunung",
+                openHours: "10:00-22:00",
+                services: ["Hot Stone", "Body Scrub", "Jacuzzi"]
+            },
+            {
+                id: 5,
+                name: "Sate Kelinci Pak Budi",
+                category: "food",
+                lat: -7.8700, lng: 112.0180,
+                price: 35000, rating: 4.5,
+                image: "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=400",
+                description: "Sate kelinci legendaris dengan bumbu kacang spesial",
+                openHours: "11:00-21:00",
+                services: ["Sate Kelinci", "Sate Ayam", "Tongseng"]
+            },
+            {
+                id: 6,
+                name: "Taman Rekreasi Selecta",
+                category: "tourism",
+                lat: -7.8650, lng: 112.0480,
+                price: 30000, rating: 4.6,
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIprqBQb-m12QP_O8_ZD1G-U3aI4hwbzPA2w&s",
+                description: "Taman rekreasi keluarga dengan kolam renang dan taman bunga",
+                openHours: "08:00-18:00",
+                services: ["Swimming Pool", "Flower Garden", "Playground"]
+            },
+            {
+                id: 7,
+                name: "Cafe Latte Art",
+                category: "food",
+                lat: -7.8680, lng: 112.0120,
+                price: 45000, rating: 4.7,
+                image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400",
+                description: "Cafe modern dengan kopi specialty dan dessert lezat",
+                openHours: "08:00-22:00",
+                services: ["Coffee", "Dessert", "Breakfast"]
+            },
+            {
+                id: 8,
+                name: "Wellness Center Harmoni",
+                category: "spa",
+                lat: -7.8820, lng: 112.0250,
+                price: 180000, rating: 4.8,
+                image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=400",
+                description: "Pusat wellness dengan yoga dan meditasi",
+                openHours: "07:00-20:00",
+                services: ["Yoga", "Meditation", "Massage"]
+            },
+            {
+                id: 17,
+                name: "Monumen Simpang Lima Gumul",
+                category: "tourism",
+                lat: -7.9265, lng: 112.0976,
+                price: 0, rating: 4.7,
+                image: "data:image/jpeg;base64,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PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuHCGemni.
+
+        // --- LOKASI PENGGUNA (DUMMY) ---
+        let userLocation = { lat: -7.8753, lng: 112.0101 }; // Lokasi Kediri (Contoh)
+        
+        // Cek dukungan Geolocation
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                userLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
+                updateFilters();
+            }, (error) => {
+                // Jika error (izin ditolak), gunakan lokasi dummy
+                userLocation = { lat: -7.8753, lng: 112.0101 };
+                updateFilters();
+            });
+        } else {
+            userLocation = { lat: -7.8753, lng: 112.0101 };
+            updateFilters();
+        }
+
+        // Hitung Jarak antara dua koordinat (Haversine Formula)
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Radius bumi dalam km
+            const dLat = (lat2 - lat1) * (Math.PI / 180);
+            const dLon = (lon2 - lon1) * (Math.PI / 180);
+            const a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c; // Jarak dalam km
+        }
+
+        // Fungsi pembantu untuk Rating Bintang
+        function getStarRating(rating) {
+            const fullStars = '⭐'.repeat(Math.floor(rating));
+            const halfStar = rating % 1 !== 0 ? '½' : '';
+            return fullStars + halfStar;
+        }
+
+        // Fungsi pembantu untuk format harga
+        function formatPrice(price) {
+            if (price === 0) return "Gratis";
+            return `Rp ${price.toLocaleString('id-ID')}`;
+        }
+
+        // Fungsi utama untuk memfilter dan me-render tempat
+        function updateFilters() {
+            const searchValue = document.getElementById('searchInput').value.toLowerCase();
+            const isDeliveryChecked = document.getElementById('deliveryCheck').checked;
+            const radiusKm = parseInt(document.getElementById('radiusSlider').value);
+            const selectedCategory = document.getElementById('categorySelect').value;
+
+            // Update nilai radius di label
+            document.getElementById('radiusValue').textContent = `${radiusKm} km`;
+
+            const filteredPlaces = places
+                .map(p => ({
+                    ...p,
+                    distance: calculateDistance(userLocation.lat, userLocation.lng, p.lat, p.lng)
+                }))
+                .filter(p => {
+                    // Filter berdasarkan kata kunci (nama dan deskripsi)
+                    const matchesSearch = p.name.toLowerCase().includes(searchValue) || p.description.toLowerCase().includes(searchValue);
+
+                    // Filter berdasarkan kategori
+                    const matchesCategory = selectedCategory === 'all' || p.category === selectedCategory;
+
+                    // Filter berdasarkan jarak
+                    const matchesRadius = p.distance <= radiusKm;
+
+                    // Filter berdasarkan Delivery (hanya untuk kategori 'food')
+                    const matchesDelivery = !isDeliveryChecked || (isDeliveryChecked && p.category === 'food' && p.phone);
+                    
+                    // Filter untuk hanya menampilkan hasil (untuk kategori tourism dan spa, delivery diabaikan)
+                    const isNonFood = p.category === 'tourism' || p.category === 'spa';
+                    const matchesNonFoodDelivery = isNonFood && !isDeliveryChecked;
+
+                    return matchesSearch && matchesCategory && matchesRadius && (matchesDelivery || matchesNonFoodDelivery);
+                });
+
+            renderPlaces(filteredPlaces);
+        }
+
+        // Fungsi untuk me-render card tempat
+        function renderPlaces(filteredPlaces) {
+            const grid = document.getElementById('placesGrid');
+            const emptyState = document.getElementById('emptyState');
+            grid.innerHTML = '';
+
+            if (filteredPlaces.length === 0) {
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+
+            filteredPlaces.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'place-card';
+                card.onclick = () => openModal(p);
+
+                const categoryText = p.category === 'food' ? 'Kuliner' : p.category === 'tourism' ? 'Wisata' : 'Spa';
+                const deliveryIcon = p.category === 'food' && p.phone ? `<div class="delivery-icon">🛵 Delivery</div>` : '';
+
+                card.innerHTML = `
+                    <div class="card-image" style="background-image: url('${p.image}')">
+                        ${deliveryIcon}
+                        <span class="category-badge">${categoryText}</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>${p.name}</h3>
+                        <div class="card-info">
+                            <span>${getStarRating(p.rating)} ${p.rating.toFixed(1)}</span>
+                            <span>${p.distance.toFixed(1)} km</span>
+                        </div>
+                        <p class="card-desc">${p.description}</p>
+                        <div style="text-align: right; font-weight: 600; color: var(--accent);">${formatPrice(p.price)}</div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Fungsi untuk membuka modal detail
+        function openModal(place) {
+            const modalOverlay = document.getElementById('modalOverlay');
+            document.getElementById('modalTitle').textContent = place.name;
+            document.getElementById('modalStar').innerHTML = `${getStarRating(place.rating)} ${place.rating.toFixed(1)}`;
+            document.getElementById('modalPrice').textContent = formatPrice(place.price);
+            document.getElementById('modalDesc').textContent = place.description;
+            document.getElementById('modalDistance').textContent = `${place.distance.toFixed(1)} km`;
+            document.getElementById('modalHours').textContent = place.openHours;
+            document.getElementById('modalImage').style.backgroundImage = `url('${place.image}')`;
+
+            const actionsContainer = document.getElementById('modalActions');
+            actionsContainer.innerHTML = '';
+
+            // Tombol Call to Action: WhatsApp/Google Maps
+            if (place.category === 'food' && place.phone) {
+                const waLink = `https://wa.me/${place.phone}?text=Halo%2C%20saya%20mau%20pesan%20delivery%20dari%20${encodeURIComponent(place.name)}`;
+                actionsContainer.innerHTML += `
+                    <a href="${waLink}" target="_blank" class="btn-action btn-delivery">
+                        <span style="font-size: 1.2rem;">💬</span> Pesan Delivery
+                    </a>
+                `;
+            }
+
+            const mapsSearchQuery = encodeURIComponent(`${place.name}, Kediri`);
+            actionsContainer.innerHTML += `
+                <a href="https://www.google.com/maps/search/?api=1&query=${mapsSearchQuery}" target="_blank" class="btn-action btn-google ${!place.phone || place.category !== 'food' ? 'btn-full' : ''}">
+                    <span style="font-size: 1.2rem;">📍</span> Lihat di Maps
+                </a>
+            `;
+
+
+            modalOverlay.classList.add('active');
+        }
+
+        // Fungsi untuk menutup modal detail
+        function closeModal(event) {
+            const modalOverlay = document.getElementById('modalOverlay');
+            if (event && event.target !== modalOverlay) return; // Hanya tutup jika klik overlay
+            modalOverlay.classList.remove('active');
+        }
+
+        // Fungsi yang dipanggil saat search input utama diubah
+        function handleSearch() {
+            updateFilters();
+        }
+
+
+        // --- FITUR KIRIM SEARCHING (CHAT AI) - PENAMBAHAN JAVASCRIPT ---
+
+        // Fungsi untuk mengaktifkan/menonaktifkan panel AI
+        function toggleAIPanel() {
+            document.getElementById('aiPanel').classList.toggle('active');
+            document.getElementById('aiFab').textContent = document.getElementById('aiPanel').classList.contains('active') ? '✖' : '💬';
+            // Scroll ke bawah saat dibuka
+            setTimeout(() => {
+                document.getElementById('aiChatbox').scrollTop = document.getElementById('aiChatbox').scrollHeight;
+            }, 100);
+        }
+        
+        // Fungsi untuk menambahkan pesan ke chatbox
+        function addAIMessage(sender, message) {
+            const chatbox = document.getElementById('aiChatbox');
+            const messageElement = document.createElement('div');
+            messageElement.className = `ai-message ${sender}-message`;
+            messageElement.textContent = message;
+            chatbox.appendChild(messageElement);
+            chatbox.scrollTop = chatbox.scrollHeight; // Scroll ke bawah
+        }
+
+        // Fungsi untuk menampilkan indikator mengetik
+        let typingIndicatorElement = null;
+        function showTypingIndicator() {
+            const chatbox = document.getElementById('aiChatbox');
+            typingIndicatorElement = document.createElement('div');
+            typingIndicatorElement.className = 'typing-indicator';
+            typingIndicatorElement.textContent = 'ExploreAI sedang berpikir...';
+            chatbox.appendChild(typingIndicatorElement);
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        // Fungsi untuk menghapus indikator mengetik
+        function removeTypingIndicator() {
+            if (typingIndicatorElement) {
+                typingIndicatorElement.remove();
+                typingIndicatorElement = null;
+            }
+        }
+
+        // Fungsi untuk memanggil API (Simulasi Pencarian Interaktif)
+        function callGeminiAPI(message) {
+            showTypingIndicator();
+
+            // Atur filter default untuk AI (prioritas Wisata dan Spa)
+            const keyword = message.toLowerCase();
+            const isSpa = keyword.includes('spa') || keyword.includes('pijat') || keyword.includes('relaksasi');
+            const isTourism = keyword.includes('wisata') || keyword.includes('alam') || keyword.includes('monumen');
+
+            // Logika simulasi pencarian berdasarkan kata kunci
+            const filtered = places
+                .map(p => ({
+                    ...p,
+                    distance: calculateDistance(userLocation.lat, userLocation.lng, p.lat, p.lng)
+                }))
+                .filter(p => {
+                    const nameLower = p.name.toLowerCase();
+                    const descLower = p.description.toLowerCase();
+                    const category = p.category;
+
+                    // Filter dasar: selalu masukkan Wisata & Spa jika kata kunci ada
+                    if (isSpa && category === 'spa') return true;
+                    if (isTourism && category === 'tourism') return true;
+
+                    // Filter berdasarkan kata kunci umum di nama/deskripsi
+                    return nameLower.includes(keyword) || descLower.includes(keyword);
+                })
+                .sort((a, b) => a.distance - b.distance) // Urutkan berdasarkan jarak
+                .slice(0, 3); // Ambil 3 teratas
+
+            setTimeout(() => {
+                removeTypingIndicator();
+                
+                let responseMessage = '';
+                
+                if (filtered.length === 0) {
+                    responseMessage = `Maaf, saya tidak menemukan tempat wisata atau spa yang sesuai dengan permintaan "${message}". Coba kata kunci lain!`;
+                } else {
+                    const categoryFilter = isSpa ? 'Spa' : isTourism ? 'Wisata' : 'Wisata & Spa';
+                    responseMessage = `Tentu! Berdasarkan permintaan Anda, berikut ${filtered.length} rekomendasi ${categoryFilter} terbaik di sekitar Anda:\n\n`;
+
+                    responseMessage += filtered.map((p, i) => {
+                        const cat = p.category === 'spa' ? 'Spa' : p.category === 'food' ? 'Makanan' : 'Wisata';
+                        return `${i + 1}. **${p.name}**\n- Kategori: ${cat}\n- Jarak: ${p.distance.toFixed(1)} km\n- Rating: ${p.rating}/5\n\n${p.description}`;
+                    }).join('\n\n');
+                    
+                    responseMessage += `\n\nAnda bisa menggunakan kolom pencarian utama di atas untuk filter yang lebih spesifik.`;
+                }
+
+                addAIMessage('assistant', responseMessage);
+            }, 1500); // Simulasi delay API 1.5 detik
+        }
+
+        // Handle AI Submit
+        function handleAISubmit() {
+            const input = document.getElementById('aiInput');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            addAIMessage('user', message);
+            input.value = '';
+
+            callGeminiAPI(message);
+        }
+
+        // Handle AI Key Press
+        function handleAIKeyPress(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault(); // Mencegah newline
+                handleAISubmit();
+            }
+        }
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeModal();
+                if (document.getElementById('aiPanel').classList.contains('active')) {
+                    toggleAIPanel();
+                }
+            }
+        });
+
+        // Inisialisasi filter saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', updateFilters);
+    </script>
+</body>
+
+</html>

@@ -1,97 +1,570 @@
-/* --- SEARCH & DELIVERY STYLES (NEW) --- */
-.search-wrapper {
-    position: relative;
-    margin-bottom: 1.5rem;
-    width: 100%;
-}
+<!DOCTYPE html>
+<html lang="id">
 
-.search-input {
-    width: 100%;
-    padding: 1rem 1rem 1rem 3rem;
-    background: rgba(10, 30, 22, 0.6);
-    border: 2px solid var(--primary);
-    border-radius: 12px;
-    color: white;
-    font-size: 1rem;
-    transition: all 0.3s;
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExploreAI Kediri - Wisata & Kuliner</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-.search-input:focus {
-    outline: none;
-    background: rgba(10, 30, 22, 0.9);
-    box-shadow: 0 0 15px rgba(15, 143, 110, 0.4);
-}
+        :root {
+            --primary: #0F8F6E;
+            --dark: #0A1E16;
+            --light: #CFFFE0;
+            --accent: #FFD700;
+        }
 
-.search-icon {
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.2rem;
-    opacity: 0.7;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.delivery-toggle-container {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    background: rgba(15, 143, 110, 0.15);
-    padding: 0.8rem;
-    border-radius: 10px;
-    border: 1px solid rgba(15, 143, 110, 0.3);
-    margin-bottom: 1rem;
-    cursor: pointer;
-}
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, #1C3A30 100%);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-.delivery-toggle-container:hover {
-    background: rgba(15, 143, 110, 0.25);
-}
+        /* --- SEARCH & DELIVERY STYLES (NEW) --- */
+        .search-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
 
-/* Toggle Switch CSS */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 26px;
-}
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            background: rgba(10, 30, 22, 0.6);
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
 
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
+        .search-input:focus {
+            outline: none;
+            background: rgba(10, 30, 22, 0.9);
+            box-shadow: 0 0 15px rgba(15, 143, 110, 0.4);
+        }
 
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-    border-radius: 34px;
-}
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
 
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 18px;
-    width: 18px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
-}
+        .delivery-toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(15, 143, 110, 0.15);
+            padding: 0.8rem;
+            border-radius: 10px;
+            border: 1px solid rgba(15, 143, 110, 0.3);
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
 
-input:checked+.slider {
-    background-color: var(--primary);
-}
+        .delivery-toggle-container:hover {
+            background: rgba(15, 143, 110, 0.25);
+        }
 
-input:checked+.slider:before {
-    transform: translateX(24px);
-}}
+        /* Toggle Switch CSS */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: var(--primary);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(24px);
+        }
+
+        /* --- EXISTING STYLES --- */
+        .header {
+            background: rgba(10, 30, 22, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(15, 143, 110, 0.2);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero {
+            padding: 4rem 2rem;
+            text-align: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .filters {
+            background: rgba(28, 58, 48, 0.5);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 1000px;
+            margin: 0 auto 3rem;
+            border: 1px solid rgba(15, 143, 110, 0.2);
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .filter-group select,
+        .filter-group input[type="range"] {
+            width: 100%;
+            padding: 0.5rem;
+            background: rgba(10, 30, 22, 0.8);
+            border: 1px solid var(--primary);
+            color: white;
+            border-radius: 8px;
+        }
+
+        .places-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .place-card {
+            background: rgba(28, 58, 48, 0.5);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(15, 143, 110, 0.2);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .place-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .delivery-icon {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #25D366;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-badge {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+
+        .card-info {
+            display: flex;
+            justify-content: space-between;
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: #1C3A30;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--primary);
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header-img {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .modal-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-action {
+            padding: 0.8rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: transform 0.2s;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-delivery {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-google {
+            background: #4285F4;
+            color: white;
+        }
+
+        .btn-full {
+            grid-column: 1 / -1;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            display: none;
+        }
+
+        /* AI Chat Panel Styles */
+        .ai-panel-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            border-radius: 50%;
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .ai-panel-toggle:hover {
+            background: #FFEB3B;
+            transform: scale(1.05);
+        }
+
+        .ai-panel {
+            position: fixed;
+            bottom: 85px;
+            right: 20px;
+            width: 90%;
+            max-width: 380px;
+            height: 500px;
+            background: #0A1E16;
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            transform: translateY(100%) scale(0.9);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease-out;
+        }
+
+        .ai-panel.active {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .ai-header {
+            padding: 1rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border-top-left-radius: 18px;
+            border-top-right-radius: 18px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ai-header-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .ai-chat-window {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .ai-input-container {
+            padding: 0.5rem 1rem 1rem;
+            border-top: 1px solid rgba(15, 143, 110, 0.3);
+            display: flex;
+            gap: 10px;
+        }
+
+        .ai-input-container input {
+            flex-grow: 1;
+            padding: 0.7rem;
+            border: 1px solid var(--primary);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .ai-input-container input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .ai-input-container button {
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 0.7rem 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .ai-input-container button:hover {
+            background: #14B98E;
+        }
+
+        .message-box {
+            max-width: 85%;
+            padding: 10px;
+            border-radius: 15px;
+            line-height: 1.4;
+            font-size: 0.9rem;
+        }
+
+        .message-user {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .message-assistant {
+            background: rgba(28, 58, 48, 0.8);
+            color: var(--light);
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .typing-indicator {
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .typing-indicator span {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: var(--light);
+            border-radius: 50%;
+            margin: 0 1px;
+            animation: bounce 0.6s infinite alternate;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+            to {
+                opacity: 0.5;
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+            .ai-panel {
+                bottom: 85px;
+                right: 5%;
+                left: 5%;
+                width: 90%;
+                height: 400px;
+            }
         }
     </style>
 </head>
@@ -155,37 +628,34 @@ input:checked+.slider:before {
                     <span id="modalStar"></span> • <span id="modalPrice"></span>
                 </div>
                 <p id="modalDesc" style="line-height: 1.6; margin-bottom: 1.5rem; color: rgba(255,255,255,0.8);"></p>
-                
+
                 <div style="background: rgba(15,143,110,0.2); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
                     <strong>📍 Jarak:</strong> <span id="modalDistance"></span><br>
                     <strong>🕒 Jam Buka:</strong> <span id="modalHours"></span>
                 </div>
 
                 <div class="modal-actions" id="modalActions">
-                    </div>
+                </div>
             </div>
         </div>
     </div>
-    
-    <button class="ai-fab" id="aiFab" onclick="toggleAIPanel()">💬</button>
 
+    <button class="ai-panel-toggle" onclick="toggleAIPanel()">💡</button>
     <div class="ai-panel" id="aiPanel">
         <div class="ai-header">
-            <span>✨ Chat AI Helper</span>
-            <button class="ai-close" onclick="toggleAIPanel()">×</button>
+            <span>Asisten Jelajah AI</span>
+            <button class="ai-header-close" onclick="toggleAIPanel()">×</button>
         </div>
-        <div class="ai-chatbox" id="aiChatbox">
-            <div class="ai-message assistant-message">
-                Halo! Saya ExploreAI Helper. 
-                <br>Coba tanyakan "tempat spa dekat sini" atau "wisata alam terbaik"!
+        <div class="ai-chat-window" id="aiChatWindow">
+            <div class="message-box message-assistant">
+                Halo! Saya Asisten AI Anda. Saya bisa membantu Anda menemukan rekomendasi tempat wisata atau kuliner di Kediri. Coba tanyakan "Tempat makan soto terdekat" atau "Wisata alam yang buka hari Minggu".
             </div>
         </div>
         <div class="ai-input-container">
-            <textarea id="aiInput" class="ai-input" placeholder="Kirim searching Anda..." onkeypress="handleAIKeyPress(event)"></textarea>
-            <button class="ai-send-btn" onclick="handleAISubmit()">Kirim</button>
+            <input type="text" id="aiInput" placeholder="Tanyakan pada AI..." onkeypress="handleAIKeyPress(event)">
+            <button onclick="handleAISubmit()">Kirim</button>
         </div>
     </div>
-
     <script>
         // --- DATA ---
         // Menambahkan properti 'phone' untuk simulasi WhatsApp Delivery
@@ -195,360 +665,351 @@ input:checked+.slider:before {
                 name: "Warung Nasi Pecel Bu Kaji",
                 category: "food",
                 lat: -7.8723, lng: 112.0145,
-                price: 15000, rating: 4.6,
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWTgR0-0OXgnzlpisff5G0eXHmNYdx11TTiA&s",
-                description: "Kuliner lokal autentik dengan cita rasa tradisional. Bumbu kacangnya legendaris.",
-                openHours: "06:00-14:00",
-                phone: "6281234567890", // Dummy phone
-                services: ["Nasi Pecel", "Rawon", "Soto"]
-            },
-            {
-                id: 37,
-                name: "Nasi Pecel Mbah Darmo 1",
-                category: "food",
-                lat: -7.8380, lng: 112.0060,
-                price: 20000, rating: 4.6,
-                image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxMTEhUTExMWFhUXFx0XGRgYGBsaHRkYHx8XGhoaHR0aHiggHR0lHxoXITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGi0mHiUtLS0tMC0tLS81LS8tLS0tLS0vLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAKwBJgMBIgACEQEDEQH/xAAcAAACAwEBAQEAAAAAAAAAAAAEBQIDBgcAAQj/xABBEAABAgQEAwUHAwMCBQQDAAABAhEAAyExBAUSQVFhcQYTIjKBkaGxwdHwFFLhYvEjM3KCkhXTBxY0c6Ky0v8/8QAGQEAAwEBAQAAAAAAAAAAAAAAAgMEAQUA/8QALBEAAgICAgEEAQIGAwAAAAAAAQIAAxEhEjEEEyJBUWEycQUUI0KR0YGh8f/aAAwDAQACEQMRAD8Aab6EEOtYSQXKjf+coXYnNEpVqlCvxqTU8wmw6wgm40qLqL/zaIf1EcwsMYlQXPcNnTyokqJJNyTFfeQRkuR4jFKaWnw7rV7I89+gjpWU9jMNJSNSda91kkf8ASAafWGV1s0FmC6nK5sxUpQJIB3Sbtz4ecN8JmAIrGyx3/DzBLNO8Q/wqcV5KeM5nPZX+lkmYidq0q06Cmpbd34VtBlSpi8ctiV4aeNSkvwUOiv3BiU/CSVpUlctJCn1UY1uyksQebxnRmAC0FSSk2cc+XUcd4...`,
-                description: "Kuliner pedas khas Kediri. Pilihan lauk beragam.",
-                openHours: "09:00-21:00",
-                services: ["Nasi Pecel", "Sayur Lodeh", "Jus Buah"]
+                rating: 4.8,
+                price: 15000,
+                distance: 1.2,
+                hours: "06:00 - 14:00 (Setiap Hari)",
+                description: "Nasi pecel legendaris dengan bumbu kacang khas Kediri yang pedas-manis. Lauk pauk lengkap seperti telur, ayam, dan aneka gorengan.",
+                image: "url('https://source.unsplash.com/400x200/?nasi+pecel+kediri')",
+                delivery: true,
+                phone: "+628123456780"
             },
             {
                 id: 3,
-                name: "Air Terjun Dolo",
+                name: "Goa Selomangleng",
                 category: "tourism",
-                lat: -7.8600, lng: 112.0250,
-                price: 25000, rating: 4.7,
-                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400",
-                description: "Destinasi wisata alam dengan pemandangan air terjun yang menakjubkan",
-                openHours: "07:00-17:00",
-                services: ["Trekking", "Photography Spot", "Camping Area"]
+                lat: -7.8184, lng: 111.9675,
+                rating: 4.5,
+                price: 10000,
+                distance: 7.5,
+                hours: "07:00 - 17:00 (Setiap Hari)",
+                description: "Situs bersejarah berupa goa peninggalan zaman kerajaan. Terletak di lereng Gunung Klotok, menawarkan pemandangan alam yang asri.",
+                image: "url('https://source.unsplash.com/400x200/?cave,mountain')",
+                delivery: false,
+                phone: ""
             },
             {
                 id: 4,
-                name: "Relaxation Heaven Spa",
-                category: "spa",
-                lat: -7.8800, lng: 112.0200,
-                price: 200000, rating: 4.9,
-                image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400",
-                description: "Spa mewah dengan pemandangan gunung",
-                openHours: "10:00-22:00",
-                services: ["Hot Stone", "Body Scrub", "Jacuzzi"]
+                name: "Taman Air Pagora",
+                category: "tourism",
+                lat: -7.8090, lng: 112.0150,
+                rating: 4.3,
+                price: 25000,
+                distance: 2.8,
+                hours: "08:00 - 16:00 (Selasa Libur)",
+                description: "Taman rekreasi keluarga dengan berbagai wahana air dan kolam renang. Tempat yang tepat untuk bersantai di akhir pekan.",
+                image: "url('https://source.unsplash.com/400x200/?waterpark')",
+                delivery: false,
+                phone: ""
             },
             {
                 id: 5,
-                name: "Sate Kelinci Pak Budi",
+                name: "Soto Ayam Kampung Pakelan",
                 category: "food",
-                lat: -7.8700, lng: 112.0180,
-                price: 35000, rating: 4.5,
-                image: "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=400",
-                description: "Sate kelinci legendaris dengan bumbu kacang spesial",
-                openHours: "11:00-21:00",
-                services: ["Sate Kelinci", "Sate Ayam", "Tongseng"]
+                lat: -7.8280, lng: 112.0230,
+                rating: 4.9,
+                price: 18000,
+                distance: 0.5,
+                hours: "10:00 - 22:00 (Setiap Hari)",
+                description: "Soto ayam dengan kuah bening kaya rempah dan daging ayam kampung yang empuk. Ditaburi koya yang melimpah.",
+                image: "url('https://source.unsplash.com/400x200/?soto+ayam')",
+                delivery: true,
+                phone: "+628123456781"
             },
             {
                 id: 6,
-                name: "Taman Rekreasi Selecta",
-                category: "tourism",
-                lat: -7.8650, lng: 112.0480,
-                price: 30000, rating: 4.6,
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIprqBQb-m12QP_O8_ZD1G-U3aI4hwbzPA2w&s",
-                description: "Taman rekreasi keluarga dengan kolam renang dan taman bunga",
-                openHours: "08:00-18:00",
-                services: ["Swimming Pool", "Flower Garden", "Playground"]
+                name: "Pemandian Tirtoyoso",
+                category: "spa",
+                lat: -7.8150, lng: 112.0000,
+                rating: 4.2,
+                price: 50000,
+                distance: 3.1,
+                hours: "09:00 - 21:00 (Minggu Tutup)",
+                description: "Pemandian air panas alami yang dipercaya memiliki khasiat untuk kesehatan dan relaksasi tubuh.",
+                image: "url('https://source.unsplash.com/400x200/?hot+spring,spa')",
+                delivery: false,
+                phone: ""
             },
             {
                 id: 7,
-                name: "Cafe Latte Art",
+                name: "Kedai Rawon Mercon",
                 category: "food",
-                lat: -7.8680, lng: 112.0120,
-                price: 45000, rating: 4.7,
-                image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400",
-                description: "Cafe modern dengan kopi specialty dan dessert lezat",
-                openHours: "08:00-22:00",
-                services: ["Coffee", "Dessert", "Breakfast"]
+                lat: -7.8400, lng: 112.0050,
+                rating: 4.6,
+                price: 22000,
+                distance: 1.8,
+                hours: "18:00 - 02:00 (Setiap Hari)",
+                description: "Rawon dengan daging yang sangat empuk dan kuah kluwek yang pekat. Tersedia level pedas 'Mercon' untuk yang berani coba.",
+                image: "url('https://source.unsplash.com/400x200/?rawon,spicy+food')",
+                delivery: true,
+                phone: "+628123456782"
             },
             {
                 id: 8,
-                name: "Wellness Center Harmoni",
-                category: "spa",
-                lat: -7.8820, lng: 112.0250,
-                price: 180000, rating: 4.8,
-                image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=400",
-                description: "Pusat wellness dengan yoga dan meditasi",
-                openHours: "07:00-20:00",
-                services: ["Yoga", "Meditation", "Massage"]
+                name: "Gunung Kelud",
+                category: "tourism",
+                lat: -7.9392, lng: 112.3023,
+                rating: 4.7,
+                price: 15000,
+                distance: 35.0,
+                hours: "24 Jam (Setiap Hari)",
+                description: "Gunung berapi aktif dengan kawah yang indah. Akses menuju puncak melalui jalur yang menantang namun pemandangan yang menakjubkan.",
+                image: "url('https://source.unsplash.com/400x200/?volcano,mountain')",
+                delivery: false,
+                phone: ""
             },
             {
-                id: 17,
-                name: "Monumen Simpang Lima Gumul",
-                category: "tourism",
-                lat: -7.9265, lng: 112.0976,
-                price: 0, rating: 4.7,
-                image: "data:image/jpeg;base64,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PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfml97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuH9X4PxO3yMt6x/1p/ufml9Y/60/3PzWp97aP+pfmn/iN3fdfuHCGemni.
+                id: 9,
+                name: "Depot Tahu Takwa Pojok",
+                category: "food",
+                lat: -7.8200, lng: 112.0090,
+                rating: 4.4,
+                price: 8000,
+                distance: 0.9,
+                hours: "09:00 - 17:00 (Setiap Hari)",
+                description: "Oleh-oleh khas Kediri, tahu takwa kuning yang gurih dan kenyal. Cocok untuk dibawa pulang atau dinikmati langsung.",
+                image: "url('https://source.unsplash.com/400x200/?tofu,snack')",
+                delivery: true,
+                phone: "+628123456783"
+            }
+        ];
 
-        // --- LOKASI PENGGUNA (DUMMY) ---
-        let userLocation = { lat: -7.8753, lng: 112.0101 }; // Lokasi Kediri (Contoh)
-        
-        // Cek dukungan Geolocation
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position) => {
-                userLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
-                updateFilters();
-            }, (error) => {
-                // Jika error (izin ditolak), gunakan lokasi dummy
-                userLocation = { lat: -7.8753, lng: 112.0101 };
-                updateFilters();
-            });
-        } else {
-            userLocation = { lat: -7.8753, lng: 112.0101 };
-            updateFilters();
-        }
+        let userLocation = { lat: -7.8200, lng: 112.0000 }; // Lokasi Pusat Kota Kediri
 
-        // Hitung Jarak antara dua koordinat (Haversine Formula)
+        // --- CORE FUNCTIONS ---
+
+        // Hitung jarak Haversine (dummy, karena lokasi Kediri dibuat statis)
         function calculateDistance(lat1, lon1, lat2, lon2) {
+            // Ini hanya fungsi dummy untuk simulasi jarak di Kediri
             const R = 6371; // Radius bumi dalam km
             const dLat = (lat2 - lat1) * (Math.PI / 180);
             const dLon = (lon2 - lon1) * (Math.PI / 180);
-            const a =
-                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                 Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
                 Math.sin(dLon / 2) * Math.sin(dLon / 2);
             const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
             return R * c; // Jarak dalam km
         }
 
-        // Fungsi pembantu untuk Rating Bintang
-        function getStarRating(rating) {
-            const fullStars = '⭐'.repeat(Math.floor(rating));
-            const halfStar = rating % 1 !== 0 ? '½' : '';
-            return fullStars + halfStar;
-        }
-
-        // Fungsi pembantu untuk format harga
-        function formatPrice(price) {
-            if (price === 0) return "Gratis";
-            return `Rp ${price.toLocaleString('id-ID')}`;
-        }
-
-        // Fungsi utama untuk memfilter dan me-render tempat
-        function updateFilters() {
-            const searchValue = document.getElementById('searchInput').value.toLowerCase();
-            const isDeliveryChecked = document.getElementById('deliveryCheck').checked;
-            const radiusKm = parseInt(document.getElementById('radiusSlider').value);
-            const selectedCategory = document.getElementById('categorySelect').value;
-
-            // Update nilai radius di label
-            document.getElementById('radiusValue').textContent = `${radiusKm} km`;
-
-            const filteredPlaces = places
-                .map(p => ({
-                    ...p,
-                    distance: calculateDistance(userLocation.lat, userLocation.lng, p.lat, p.lng)
-                }))
-                .filter(p => {
-                    // Filter berdasarkan kata kunci (nama dan deskripsi)
-                    const matchesSearch = p.name.toLowerCase().includes(searchValue) || p.description.toLowerCase().includes(searchValue);
-
-                    // Filter berdasarkan kategori
-                    const matchesCategory = selectedCategory === 'all' || p.category === selectedCategory;
-
-                    // Filter berdasarkan jarak
-                    const matchesRadius = p.distance <= radiusKm;
-
-                    // Filter berdasarkan Delivery (hanya untuk kategori 'food')
-                    const matchesDelivery = !isDeliveryChecked || (isDeliveryChecked && p.category === 'food' && p.phone);
-                    
-                    // Filter untuk hanya menampilkan hasil (untuk kategori tourism dan spa, delivery diabaikan)
-                    const isNonFood = p.category === 'tourism' || p.category === 'spa';
-                    const matchesNonFoodDelivery = isNonFood && !isDeliveryChecked;
-
-                    return matchesSearch && matchesCategory && matchesRadius && (matchesDelivery || matchesNonFoodDelivery);
-                });
-
-            renderPlaces(filteredPlaces);
-        }
-
-        // Fungsi untuk me-render card tempat
-        function renderPlaces(filteredPlaces) {
+        // Render Cards
+        function renderPlaces(placesToRender) {
             const grid = document.getElementById('placesGrid');
             const emptyState = document.getElementById('emptyState');
             grid.innerHTML = '';
 
-            if (filteredPlaces.length === 0) {
+            if (placesToRender.length === 0) {
                 emptyState.style.display = 'block';
                 return;
+            } else {
+                emptyState.style.display = 'none';
             }
 
-            emptyState.style.display = 'none';
-
-            filteredPlaces.forEach(p => {
+            placesToRender.forEach(place => {
                 const card = document.createElement('div');
                 card.className = 'place-card';
-                card.onclick = () => openModal(p);
+                card.onclick = () => openModal(place);
 
-                const categoryText = p.category === 'food' ? 'Kuliner' : p.category === 'tourism' ? 'Wisata' : 'Spa';
-                const deliveryIcon = p.category === 'food' && p.phone ? `<div class="delivery-icon">🛵 Delivery</div>` : '';
+                const categoryText = place.category === 'spa' ? '💆 Spa & Relax' : place.category === 'food' ? '🍽️ Kuliner' : '🏞️ Wisata';
 
                 card.innerHTML = `
-                    <div class="card-image" style="background-image: url('${p.image}')">
-                        ${deliveryIcon}
-                        <span class="category-badge">${categoryText}</span>
+                    <div class="card-image" style="background-image: ${place.image}">
+                        ${place.delivery ? '<div class="delivery-icon">🛵 Delivery</div>' : ''}
+                        <div class="category-badge">${categoryText}</div>
                     </div>
                     <div class="card-content">
-                        <h3>${p.name}</h3>
+                        <h3>${place.name}</h3>
                         <div class="card-info">
-                            <span>${getStarRating(p.rating)} ${p.rating.toFixed(1)}</span>
-                            <span>${p.distance.toFixed(1)} km</span>
+                            <span>⭐ ${place.rating} / 5</span>
+                            <span>💰 Rp ${place.price.toLocaleString('id-ID')}</span>
+                            <span>📍 ${place.distance.toFixed(1)} km</span>
                         </div>
-                        <p class="card-desc">${p.description}</p>
-                        <div style="text-align: right; font-weight: 600; color: var(--accent);">${formatPrice(p.price)}</div>
+                        <p class="card-desc">${place.description}</p>
                     </div>
                 `;
                 grid.appendChild(card);
             });
         }
 
-        // Fungsi untuk membuka modal detail
-        function openModal(place) {
-            const modalOverlay = document.getElementById('modalOverlay');
-            document.getElementById('modalTitle').textContent = place.name;
-            document.getElementById('modalStar').innerHTML = `${getStarRating(place.rating)} ${place.rating.toFixed(1)}`;
-            document.getElementById('modalPrice').textContent = formatPrice(place.price);
-            document.getElementById('modalDesc').textContent = place.description;
-            document.getElementById('modalDistance').textContent = `${place.distance.toFixed(1)} km`;
-            document.getElementById('modalHours').textContent = place.openHours;
-            document.getElementById('modalImage').style.backgroundImage = `url('${place.image}')`;
+        // Apply Filters
+        function applyFilters() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const radius = parseInt(document.getElementById('radiusSlider').value);
+            const category = document.getElementById('categorySelect').value;
+            const deliveryOnly = document.getElementById('deliveryCheck').checked;
 
-            const actionsContainer = document.getElementById('modalActions');
-            actionsContainer.innerHTML = '';
+            document.getElementById('radiusValue').textContent = `${radius} km`;
 
-            // Tombol Call to Action: WhatsApp/Google Maps
-            if (place.category === 'food' && place.phone) {
-                const waLink = `https://wa.me/${place.phone}?text=Halo%2C%20saya%20mau%20pesan%20delivery%20dari%20${encodeURIComponent(place.name)}`;
-                actionsContainer.innerHTML += `
-                    <a href="${waLink}" target="_blank" class="btn-action btn-delivery">
-                        <span style="font-size: 1.2rem;">💬</span> Pesan Delivery
-                    </a>
-                `;
-            }
+            const filtered = places
+                .map(place => ({
+                    ...place,
+                    distance: calculateDistance(userLocation.lat, userLocation.lng, place.lat, place.lng)
+                }))
+                .filter(place => {
+                    const matchesSearch = place.name.toLowerCase().includes(searchInput) ||
+                        place.description.toLowerCase().includes(searchInput);
+                    const matchesRadius = place.distance <= radius;
+                    const matchesCategory = category === 'all' || place.category === category;
+                    const matchesDelivery = !deliveryOnly || place.delivery;
 
-            const mapsSearchQuery = encodeURIComponent(`${place.name}, Kediri`);
-            actionsContainer.innerHTML += `
-                <a href="https://www.google.com/maps/search/?api=1&query=${mapsSearchQuery}" target="_blank" class="btn-action btn-google ${!place.phone || place.category !== 'food' ? 'btn-full' : ''}">
-                    <span style="font-size: 1.2rem;">📍</span> Lihat di Maps
-                </a>
-            `;
+                    place.visible = matchesSearch && matchesRadius && matchesCategory && matchesDelivery;
+                    return place.visible;
+                })
+                .sort((a, b) => a.distance - b.distance); // Urutkan berdasarkan jarak terdekat
 
-
-            modalOverlay.classList.add('active');
+            return filtered;
         }
 
-        // Fungsi untuk menutup modal detail
-        function closeModal(event) {
-            const modalOverlay = document.getElementById('modalOverlay');
-            if (event && event.target !== modalOverlay) return; // Hanya tutup jika klik overlay
-            modalOverlay.classList.remove('active');
+        function updateFilters() {
+            const filteredPlaces = applyFilters();
+            renderPlaces(filteredPlaces);
         }
 
-        // Fungsi yang dipanggil saat search input utama diubah
         function handleSearch() {
             updateFilters();
         }
 
+        // --- MODAL FUNCTIONS ---
 
-        // --- FITUR KIRIM SEARCHING (CHAT AI) - PENAMBAHAN JAVASCRIPT ---
+        function openModal(place) {
+            document.getElementById('modalImage').style.backgroundImage = place.image;
+            document.getElementById('modalTitle').textContent = place.name;
+            document.getElementById('modalStar').textContent = `⭐ ${place.rating} / 5`;
+            document.getElementById('modalPrice').textContent = `Rp ${place.price.toLocaleString('id-ID')}`;
+            document.getElementById('modalDesc').textContent = place.description;
+            document.getElementById('modalDistance').textContent = `${place.distance.toFixed(1)} km`;
+            document.getElementById('modalHours').textContent = place.hours;
 
-        // Fungsi untuk mengaktifkan/menonaktifkan panel AI
-        function toggleAIPanel() {
-            document.getElementById('aiPanel').classList.toggle('active');
-            document.getElementById('aiFab').textContent = document.getElementById('aiPanel').classList.contains('active') ? '✖' : '💬';
-            // Scroll ke bawah saat dibuka
-            setTimeout(() => {
-                document.getElementById('aiChatbox').scrollTop = document.getElementById('aiChatbox').scrollHeight;
-            }, 100);
+            const actionsContainer = document.getElementById('modalActions');
+            actionsContainer.innerHTML = '';
+
+            // 1. Google Maps (Selalu Ada)
+            const mapLink = `https://www.google.com/maps/search/?api=1&query=${place.lat},${place.lng}`;
+            const btnMap = document.createElement('a');
+            btnMap.href = mapLink;
+            btnMap.target = "_blank";
+            btnMap.className = 'btn-action btn-google btn-full';
+            btnMap.innerHTML = `<span style="font-size:1.2em;">🗺️</span> Lihat di Google Maps`;
+            actionsContainer.appendChild(btnMap);
+
+            // 2. WhatsApp Delivery (Jika ada)
+            if (place.delivery && place.phone) {
+                const message = encodeURIComponent(`Halo, saya ingin memesan dari ${place.name} yang terdaftar di ExploreAI Kediri. Mohon info menu dan cara pemesanan.`);
+                const waLink = `https://wa.me/${place.phone.replace('+', '')}?text=${message}`;
+                const btnDelivery = document.createElement('a');
+                btnDelivery.href = waLink;
+                btnDelivery.target = "_blank";
+                btnDelivery.className = 'btn-action btn-delivery';
+                btnDelivery.innerHTML = `<span style="font-size:1.2em;">📞</span> Pesan Antar via WhatsApp`;
+                actionsContainer.appendChild(btnDelivery);
+            }
+
+            // 3. Tombol Cadangan (Jika tidak ada delivery)
+            if (!place.delivery) {
+                const btnReserve = document.createElement('button');
+                btnReserve.className = 'btn-action btn-delivery';
+                btnReserve.innerHTML = `<span style="font-size:1.2em;">ℹ️</span> Hubungi Tempat (Demo)`;
+                btnReserve.onclick = () => alert(`Fungsi menghubungi ${place.name} sedang dalam pengembangan.`);
+                actionsContainer.appendChild(btnReserve);
+            }
+
+            document.getElementById('modalOverlay').classList.add('active');
         }
-        
-        // Fungsi untuk menambahkan pesan ke chatbox
-        function addAIMessage(sender, message) {
-            const chatbox = document.getElementById('aiChatbox');
-            const messageElement = document.createElement('div');
-            messageElement.className = `ai-message ${sender}-message`;
-            messageElement.textContent = message;
-            chatbox.appendChild(messageElement);
-            chatbox.scrollTop = chatbox.scrollHeight; // Scroll ke bawah
-        }
 
-        // Fungsi untuk menampilkan indikator mengetik
-        let typingIndicatorElement = null;
-        function showTypingIndicator() {
-            const chatbox = document.getElementById('aiChatbox');
-            typingIndicatorElement = document.createElement('div');
-            typingIndicatorElement.className = 'typing-indicator';
-            typingIndicatorElement.textContent = 'ExploreAI sedang berpikir...';
-            chatbox.appendChild(typingIndicatorElement);
-            chatbox.scrollTop = chatbox.scrollHeight;
-        }
-
-        // Fungsi untuk menghapus indikator mengetik
-        function removeTypingIndicator() {
-            if (typingIndicatorElement) {
-                typingIndicatorElement.remove();
-                typingIndicatorElement = null;
+        function closeModal(event) {
+            // Tutup hanya jika klik di overlay atau tombol close
+            if (!event || event.target.id === 'modalOverlay' || event.target.classList.contains('modal-close')) {
+                document.getElementById('modalOverlay').classList.remove('active');
             }
         }
 
-        // Fungsi untuk memanggil API (Simulasi Pencarian Interaktif)
-        function callGeminiAPI(message) {
-            showTypingIndicator();
+        // --- API & AI Chat Functions ---
+        // SILAKAN GANTI DENGAN API KEY GEMINI ANDA
+        const GEMINI_API_KEY = ""; 
+        const API_BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 
-            // Atur filter default untuk AI (prioritas Wisata dan Spa)
-            const keyword = message.toLowerCase();
-            const isSpa = keyword.includes('spa') || keyword.includes('pijat') || keyword.includes('relaksasi');
-            const isTourism = keyword.includes('wisata') || keyword.includes('alam') || keyword.includes('monumen');
+        function toggleAIPanel() {
+            document.getElementById('aiPanel').classList.toggle('active');
+            if (document.getElementById('aiPanel').classList.contains('active')) {
+                document.getElementById('aiInput').focus();
+            }
+        }
 
-            // Logika simulasi pencarian berdasarkan kata kunci
-            const filtered = places
-                .map(p => ({
-                    ...p,
-                    distance: calculateDistance(userLocation.lat, userLocation.lng, p.lat, p.lng)
-                }))
-                .filter(p => {
-                    const nameLower = p.name.toLowerCase();
-                    const descLower = p.description.toLowerCase();
-                    const category = p.category;
+        function addAIMessage(sender, message) {
+            const chatWindow = document.getElementById('aiChatWindow');
+            const msgBox = document.createElement('div');
+            msgBox.className = `message-box message-${sender}`;
+            msgBox.innerHTML = message.replace(/\n/g, '<br>'); // Handle newlines
+            chatWindow.appendChild(msgBox);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
 
-                    // Filter dasar: selalu masukkan Wisata & Spa jika kata kunci ada
-                    if (isSpa && category === 'spa') return true;
-                    if (isTourism && category === 'tourism') return true;
+        function addTypingIndicator() {
+            const chatWindow = document.getElementById('aiChatWindow');
+            const indicator = document.createElement('div');
+            indicator.className = 'message-box message-assistant typing-indicator-container';
+            indicator.id = 'typingIndicator';
+            indicator.innerHTML = `AI sedang mengetik<span>.</span><span>.</span><span>.</span>`;
+            chatWindow.appendChild(indicator);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
 
-                    // Filter berdasarkan kata kunci umum di nama/deskripsi
-                    return nameLower.includes(keyword) || descLower.includes(keyword);
-                })
-                .sort((a, b) => a.distance - b.distance) // Urutkan berdasarkan jarak
-                .slice(0, 3); // Ambil 3 teratas
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
 
-            setTimeout(() => {
-                removeTypingIndicator();
+        async function callGeminiAPI(prompt) {
+            addTypingIndicator();
+            
+            // Siapkan daftar tempat yang sedang ditampilkan untuk dijadikan konteks
+            const filteredPlaces = places.filter(p => p.visible).map(p => ({
+                name: p.name,
+                category: p.category,
+                distance: p.distance.toFixed(1),
+                price: p.price,
+                rating: p.rating,
+                description: p.description.substring(0, 100) + '...'
+            }));
+
+            // System Instruction
+            const systemInstruction = `Anda adalah Asisten Jelajah AI yang membantu pengguna menemukan rekomendasi tempat di Kediri. Daftar tempat yang sedang difilter/ditampilkan di halaman utama adalah:\n\n${JSON.stringify(filteredPlaces)}\n\nGunakan daftar ini untuk menjawab pertanyaan pengguna. Berikan jawaban yang ramah, informatif, dan relevan dengan tempat-tempat tersebut. Format jawaban Anda dengan singkat, padat, dan gunakan emoji.`;
+
+            const requestBody = {
+                contents: [{
+                    parts: [{ text: prompt }]
+                }],
+                config: {
+                    systemInstruction: systemInstruction,
+                    // Batasan lainnya seperti suhu, token, dll. bisa ditambahkan di sini
+                }
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}?key=${GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
                 
-                let responseMessage = '';
-                
-                if (filtered.length === 0) {
-                    responseMessage = `Maaf, saya tidak menemukan tempat wisata atau spa yang sesuai dengan permintaan "${message}". Coba kata kunci lain!`;
-                } else {
-                    const categoryFilter = isSpa ? 'Spa' : isTourism ? 'Wisata' : 'Wisata & Spa';
-                    responseMessage = `Tentu! Berdasarkan permintaan Anda, berikut ${filtered.length} rekomendasi ${categoryFilter} terbaik di sekitar Anda:\n\n`;
-
-                    responseMessage += filtered.map((p, i) => {
-                        const cat = p.category === 'spa' ? 'Spa' : p.category === 'food' ? 'Makanan' : 'Wisata';
-                        return `${i + 1}. **${p.name}**\n- Kategori: ${cat}\n- Jarak: ${p.distance.toFixed(1)} km\n- Rating: ${p.rating}/5\n\n${p.description}`;
-                    }).join('\n\n');
-                    
-                    responseMessage += `\n\nAnda bisa menggunakan kolom pencarian utama di atas untuk filter yang lebih spesifik.`;
+                if (!response.ok) { // Menggunakan response.ok untuk pemeriksaan status 200-299
+                    throw new Error(`Panggilan API gagal dengan status: ${response.status}`);
                 }
 
-                addAIMessage('assistant', responseMessage);
-            }, 1500); // Simulasi delay API 1.5 detik
+                const data = await response.json();
+                const text = data.candidates[0].content.parts[0].text;
+
+                removeTypingIndicator();
+                addAIMessage('assistant', text);
+
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                removeTypingIndicator();
+                addAIMessage('assistant', `❌ Gagal menghubungi layanan AI. Pastikan Anda telah mengisi GEMINI_API_KEY dengan benar dan jaringan Anda stabil. Detail error: ${error.message}`);
+            }
         }
 
         // Handle AI Submit
@@ -566,8 +1027,7 @@ input:checked+.slider:before {
 
         // Handle AI Key Press
         function handleAIKeyPress(event) {
-            if (event.key === 'Enter' && !event.shiftKey) {
-                event.preventDefault(); // Mencegah newline
+            if (event.key === 'Enter') {
                 handleAISubmit();
             }
         }
@@ -582,8 +1042,10 @@ input:checked+.slider:before {
             }
         });
 
-        // Inisialisasi filter saat halaman dimuat
-        document.addEventListener('DOMContentLoaded', updateFilters);
+        // Initial Load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateFilters();
+        });
     </script>
 </body>
 

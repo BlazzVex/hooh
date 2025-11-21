@@ -4,9 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExploreAI - Temukan Tempat Impianmu</title>
+    <title>ExploreAI Kediri - Wisata & Kuliner</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        :root {
+            --primary: #0F8F6E;
+            --dark: #0A1E16;
+            --light: #CFFFE0;
+            --accent: #FFD700;
+        }
 
         * {
             margin: 0;
@@ -16,44 +23,13 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #0A1E16 0%, #1C3A30 100%);
-            color: #CFFFE0;
+            background: linear-gradient(135deg, var(--dark) 0%, #1C3A30 100%);
+            color: var(--light);
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 10px 30px rgba(15, 143, 110, 0.5); }
-            50% { box-shadow: 0 10px 50px rgba(15, 143, 110, 0.8); }
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
-        }
-
-        @keyframes typing {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-10px); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes zoomIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        /* Header */
+        /* --- HEADER --- */
         .header {
             background: rgba(10, 30, 22, 0.9);
             backdrop-filter: blur(20px);
@@ -62,11 +38,6 @@
             top: 0;
             z-index: 100;
             border-bottom: 1px solid rgba(15, 143, 110, 0.2);
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -75,17 +46,14 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #0F8F6E, #CFFFE0);
+            background: linear-gradient(135deg, var(--primary), var(--light));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
-        /* Hero Section */
+        /* --- HERO & SEARCH --- */
         .hero {
-            padding: 4rem 2rem;
+            padding: 4rem 2rem 2rem;
             text-align: center;
             max-width: 1400px;
             margin: 0 auto;
@@ -94,170 +62,106 @@
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, #CFFFE0, #0F8F6E);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: fadeInUp 0.8s;
+            color: var(--light);
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            margin-bottom: 3rem;
-            animation: fadeInUp 0.8s 0.2s both;
-        }
-
-        /* Mood Selector */
-        .mood-selector {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 3rem;
-            animation: fadeInUp 0.8s 0.4s both;
-        }
-
-        .mood-btn {
-            background: rgba(15, 143, 110, 0.1);
-            border: 2px solid #0F8F6E;
-            color: #CFFFE0;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .mood-btn:hover {
-            background: #0F8F6E;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(15, 143, 110, 0.3);
-        }
-
-        /* Filters & Search Container */
         .filters {
             background: rgba(28, 58, 48, 0.5);
             backdrop-filter: blur(20px);
             padding: 2rem;
             border-radius: 20px;
-            max-width: 1000px;
+            max-width: 800px;
             margin: 0 auto 3rem;
             border: 1px solid rgba(15, 143, 110, 0.2);
-            animation: fadeInUp 0.8s 0.6s both;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
 
-        /* Search Bar Styles */
-        .search-container {
-            margin-bottom: 2rem;
+        /* SEARCH BAR STYLING */
+        .search-wrapper {
             position: relative;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .search-icon-wrapper {
-            position: absolute;
-            left: 1.2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #0F8F6E;
-            font-size: 1.2rem;
-            pointer-events: none;
+            margin-bottom: 1.5rem;
+            width: 100%;
         }
 
         .search-input {
             width: 100%;
-            padding: 1rem 1rem 1rem 3.5rem;
+            padding: 1.2rem 1.2rem 1.2rem 3.5rem;
             background: rgba(10, 30, 22, 0.8);
-            border: 2px solid #0F8F6E;
-            border-radius: 50px;
-            color: #CFFFE0;
+            border: 2px solid var(--primary);
+            border-radius: 12px;
+            color: white;
             font-size: 1.1rem;
             transition: all 0.3s;
         }
 
         .search-input:focus {
             outline: none;
-            box-shadow: 0 0 20px rgba(15, 143, 110, 0.4);
-            background: rgba(10, 30, 22, 0.95);
-            border-color: #CFFFE0;
+            background: rgba(10, 30, 22, 1);
+            box-shadow: 0 0 20px rgba(15, 143, 110, 0.6);
+            border-color: var(--light);
         }
 
-        .search-input::placeholder {
-            color: rgba(207, 255, 224, 0.5);
+        .search-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.4rem;
+            opacity: 0.8;
         }
 
         .filter-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(15, 143, 110, 0.2);
-        }
-
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            align-items: end;
         }
 
         .filter-group label {
-            color: #CFFFE0;
+            display: block;
+            margin-bottom: 0.5rem;
             font-weight: 600;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: var(--primary);
+            text-align: left;
         }
 
-        .filter-group input,
-        .filter-group select {
-            background: rgba(10, 30, 22, 0.8);
-            border: 1px solid #0F8F6E;
-            color: #CFFFE0;
+        .filter-group select,
+        .filter-group input[type="range"] {
+            width: 100%;
             padding: 0.8rem;
-            border-radius: 10px;
+            background: rgba(10, 30, 22, 0.8);
+            border: 1px solid var(--primary);
+            color: white;
+            border-radius: 8px;
             font-size: 1rem;
         }
 
-        .filter-group input[type="range"] {
-            accent-color: #0F8F6E;
-        }
-
-        .range-value {
-            color: #0F8F6E;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        /* Places Grid */
+        /* --- CARDS --- */
         .places-grid {
             max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
         }
 
         .place-card {
-            background: rgba(28, 58, 48, 0.5);
-            backdrop-filter: blur(20px);
+            background: rgba(28, 58, 48, 0.6);
             border-radius: 20px;
             overflow: hidden;
             border: 1px solid rgba(15, 143, 110, 0.2);
-            cursor: pointer;
             transition: all 0.3s;
-            animation: fadeInUp 0.5s;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .place-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(15, 143, 110, 0.3);
-            border-color: #0F8F6E;
+            border-color: var(--primary);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
 
         .card-image {
@@ -267,68 +171,46 @@
             position: relative;
         }
 
-        .fav-btn {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: rgba(10, 30, 22, 0.9);
-            border: none;
-            padding: 0.5rem;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-        }
-
-        .fav-btn:hover {
-            transform: scale(1.1);
-        }
-
         .category-badge {
             position: absolute;
-            bottom: 1rem;
-            left: 1rem;
-            background: rgba(15, 143, 110, 0.9);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 600;
+            border: 1px solid var(--primary);
         }
 
         .card-content {
             padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .card-content h3 {
-            color: #CFFFE0;
             margin-bottom: 0.5rem;
-            font-size: 1.3rem;
+            color: var(--light);
+            font-size: 1.25rem;
         }
 
         .card-info {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
+            justify-content: space-between;
+            color: var(--primary);
             font-size: 0.9rem;
-            color: #0F8F6E;
+            margin-bottom: 1rem;
+            font-weight: 600;
         }
 
         .card-desc {
-            color: rgba(207, 255, 224, 0.8);
             font-size: 0.9rem;
-            margin-bottom: 1rem;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
             line-height: 1.5;
+            flex-grow: 1;
         }
 
         .card-footer {
@@ -336,435 +218,160 @@
             justify-content: space-between;
             align-items: center;
             padding-top: 1rem;
-            border-top: 1px solid rgba(15, 143, 110, 0.2);
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
         .price {
-            color: #0F8F6E;
+            color: var(--accent);
             font-weight: 700;
             font-size: 1.1rem;
         }
 
-        .hours {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            font-size: 0.85rem;
-            color: rgba(207, 255, 224, 0.7);
-        }
-
-        /* AI Chat Button */
-        .ai-chat-btn {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: linear-gradient(135deg, #0F8F6E, #1C3A30);
-            border: none;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(15, 143, 110, 0.5);
-            transition: all 0.3s;
-            z-index: 1000;
-            animation: pulse 2s infinite;
-        }
-
-        .ai-chat-btn:hover {
-            transform: scale(1.1);
-        }
-
-        /* AI Panel */
-        .ai-panel {
-            position: fixed;
-            bottom: 0;
-            right: 0;
-            width: 100%;
-            max-width: 400px;
-            height: 600px;
-            background: rgba(10, 30, 22, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid #0F8F6E;
-            border-radius: 20px 20px 0 0;
-            display: none;
-            flex-direction: column;
-            z-index: 1001;
-            animation: slideUp 0.3s;
-        }
-
-        .ai-panel.active {
-            display: flex;
-        }
-
-        .ai-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid rgba(15, 143, 110, 0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .ai-header h3 {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #0F8F6E;
-        }
-
-        .ai-close {
-            background: none;
-            border: none;
-            color: #CFFFE0;
-            cursor: pointer;
-            padding: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-
-        .ai-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .ai-message {
-            padding: 1rem;
-            border-radius: 15px;
-            max-width: 80%;
-            animation: fadeIn 0.3s;
-            white-space: pre-wrap;
-        }
-
-        .ai-message.user {
-            background: rgba(15, 143, 110, 0.2);
-            align-self: flex-end;
-            border: 1px solid #0F8F6E;
-        }
-
-        .ai-message.assistant {
-            background: rgba(28, 58, 48, 0.5);
-            align-self: flex-start;
-            border: 1px solid rgba(15, 143, 110, 0.2);
-        }
-
-        .ai-input-area {
-            padding: 1.5rem;
-            border-top: 1px solid rgba(15, 143, 110, 0.2);
-            display: flex;
-            gap: 1rem;
-        }
-
-        .ai-input-area input {
-            flex: 1;
-            background: rgba(28, 58, 48, 0.5);
-            border: 1px solid #0F8F6E;
-            color: #CFFFE0;
-            padding: 1rem;
-            border-radius: 10px;
-            font-size: 1rem;
-        }
-
-        .ai-send-btn {
-            background: #0F8F6E;
-            border: none;
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            color: white;
-            font-weight: 600;
-        }
-
-        .ai-send-btn:hover {
-            background: #0C7A5C;
-            transform: scale(1.05);
-        }
-
-        .ai-send-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .typing-indicator {
-            display: flex;
-            gap: 0.3rem;
-            padding: 1rem;
-            align-self: flex-start;
-        }
-
-        .typing-dot {
-            width: 8px;
-            height: 8px;
-            background: #0F8F6E;
-            border-radius: 50%;
-            animation: typing 1.4s infinite;
-        }
-
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        /* Modal */
+        /* --- MODAL --- */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(10, 30, 22, 0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.9);
             display: none;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             z-index: 2000;
-            animation: fadeIn 0.3s;
+            opacity: 0;
+            transition: opacity 0.3s;
+            padding: 1rem;
         }
 
         .modal-overlay.active {
             display: flex;
+            opacity: 1;
         }
 
         .modal-content {
-            background: rgba(28, 58, 48, 0.95);
-            border: 1px solid #0F8F6E;
+            background: #1C3A30;
+            width: 100%;
+            max-width: 500px;
             border-radius: 20px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
+            overflow: hidden;
+            border: 1px solid var(--primary);
             position: relative;
-            animation: zoomIn 0.3s;
+            transform: scale(0.8);
+            transition: transform 0.3s;
+            box-shadow: 0 0 50px rgba(15, 143, 110, 0.2);
         }
 
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: rgba(10, 30, 22, 0.9);
-            border: 1px solid #0F8F6E;
-            padding: 0.5rem;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            z-index: 10;
-            color: #CFFFE0;
-            font-size: 1.5rem;
-            width: 40px;
-            height: 40px;
-            align-items: center;
-            justify-content: center;
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
         }
 
-        .modal-header {
-            height: 300px;
+        .modal-header-img {
+            height: 250px;
             background-size: cover;
             background-position: center;
-            position: relative;
-            border-radius: 20px 20px 0 0;
-        }
-
-        .modal-header-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(10, 30, 22, 0.9));
-            padding: 2rem 2rem 1rem;
-        }
-
-        .modal-header-overlay h2 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-rating {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.2rem;
-            font-weight: 600;
         }
 
         .modal-body {
             padding: 2rem;
         }
 
-        .modal-desc {
-            margin-bottom: 2rem;
-            line-height: 1.6;
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .modal-info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .info-box {
-            background: rgba(15, 143, 110, 0.1);
-            padding: 1rem;
-            border-radius: 15px;
-            border: 1px solid rgba(15, 143, 110, 0.3);
-        }
-
-        .info-box strong {
-            display: block;
-            margin-bottom: 0.3rem;
-            margin-top: 0.5rem;
-        }
-
-        .info-box p {
-            opacity: 0.8;
-        }
-
-        .services-section {
-            margin-bottom: 2rem;
-        }
-
-        .services-section h4 {
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-            color: #0F8F6E;
-        }
-
-        .services-list {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .service-tag {
-            background: rgba(15, 143, 110, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            border: 1px solid #0F8F6E;
-        }
-
-        .btn-primary {
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
-            background: linear-gradient(135deg, #0F8F6E, #0C7A5C);
+            transition: background 0.2s;
+        }
+
+        .modal-close:hover {
+            background: var(--primary);
+        }
+
+        .service-tag {
+            display: inline-block;
+            background: rgba(15, 143, 110, 0.2);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            border: 1px solid var(--primary);
+        }
+
+        .btn-action {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
             color: white;
-            padding: 1rem 2rem;
-            border-radius: 15px;
+            text-align: center;
             text-decoration: none;
+            border-radius: 12px;
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.2s;
         }
 
-        .btn-primary:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(15, 143, 110, 0.4);
+        .btn-action:hover {
+            background: #0B6E54;
         }
 
+        /* Empty State */
         .empty-state {
             text-align: center;
             padding: 4rem 2rem;
-            opacity: 0.6;
+            display: none;
+            color: rgba(255,255,255,0.6);
         }
 
-        .empty-state h3 {
-            font-size: 1.5rem;
-            margin: 1rem 0;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .mood-btn {
-                padding: 0.8rem 1.5rem;
-                font-size: 1rem;
-            }
-
-            .ai-panel {
-                max-width: 100%;
-            }
-
-            .places-grid {
-                grid-template-columns: 1fr;
-            }
+            .hero h1 { font-size: 2rem; }
+            .filter-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 
 <body>
     <header class="header">
-        <div class="header-content">
-            <div class="logo">
-                <span>✨</span> ExploreAI
-            </div>
-        </div>
+        <div class="logo">✨ ExploreAI Kediri</div>
     </header>
 
     <div class="hero">
-        <h1>Temukan Tempat Impianmu dengan AI</h1>
-        <p>Spa, Kuliner, dan Wisata Terdekat dengan Rekomendasi Personal AI</p>
-
-        <div class="mood-selector">
-            <button class="mood-btn" onclick="handleMoodSearch('stress')">😭 Stress</button>
-            <button class="mood-btn" onclick="handleMoodSearch('santai')">😌 Santai</button>
-            <button class="mood-btn" onclick="handleMoodSearch('capek')">😴 Capek</button>
-            <button class="mood-btn" onclick="handleMoodSearch('lapar')">🤤 Lapar</button>
-            <button class="mood-btn" onclick="handleMoodSearch('jalan')">🧭 Jalan-jalan</button>
-        </div>
+        <h1>Jelajahi Wisata & Kuliner</h1>
+        <p>Temukan hidden gem di Kediri, dari spa relaksasi hingga kuliner legendaris.</p>
 
         <div class="filters">
-            <div class="search-container">
-                <div class="search-icon-wrapper">
-                    <span>🔍</span>
-                </div>
-                <input type="text" id="searchInput" class="search-input" placeholder="Cari nama tempat..." oninput="handleSearch(this.value)">
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" class="search-input" 
+                       placeholder="Cari nama tempat, jenis makanan, atau layanan..." 
+                       oninput="handleSearch()">
             </div>
 
             <div class="filter-grid">
                 <div class="filter-group">
-                    <label>Radius: <span class="range-value" id="radiusValue">10 km</span></label>
-                    <input type="range" id="radiusSlider" min="1" max="50" value="10" onchange="updateFilters()">
+                    <label>Jarak Maksimal: <span id="radiusValue">20 km</span></label>
+                    <input type="range" id="radiusSlider" min="1" max="50" value="20" oninput="updateFilters()">
                 </div>
                 <div class="filter-group">
                     <label>Kategori</label>
                     <select id="categorySelect" onchange="updateFilters()">
-                        <option value="all">Semua</option>
-                        <option value="spa">Spa</option>
-                        <option value="food">Kuliner</option>
-                        <option value="tourism">Wisata</option>
+                        <option value="all">Semua Kategori</option>
+                        <option value="food">🍽️ Kuliner</option>
+                        <option value="tourism">🏞️ Wisata</option>
+                        <option value="spa">💆 Spa & Relax</option>
                     </select>
-                </div>
-                <div class="filter-group">
-                    <label>Budget: <span class="range-value" id="budgetValue">Rp 1.000.000</span></label>
-                    <input type="range" id="budgetSlider" min="10000" max="1000000" step="10000" value="1000000"
-                        onchange="updateFilters()">
                 </div>
             </div>
         </div>
@@ -772,88 +379,47 @@
 
     <div class="places-grid" id="placesGrid"></div>
 
-    <div class="empty-state" id="emptyState" style="display: none;">
-        <div style="font-size: 4rem; margin-bottom: 1rem;">📍</div>
-        <h3>Tidak ada tempat yang sesuai</h3>
-        <p>Coba kata kunci lain, perluas radius pencarian atau tingkatkan budget Anda</p>
-    </div>
-
-    <button class="ai-chat-btn" onclick="toggleAIPanel()">
-        <span style="font-size: 2rem;">✨</span>
-    </button>
-
-    <div class="ai-panel" id="aiPanel">
-        <div class="ai-header">
-            <h3><span style="font-size: 1.5rem;">✨</span> AI Assistant</h3>
-            <button class="ai-close" onclick="toggleAIPanel()">×</button>
-        </div>
-        <div class="ai-messages" id="aiMessages">
-            <div style="text-align: center; opacity: 0.6; margin-top: 2rem;">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">✨</div>
-                <p>Halo! Saya siap membantu Anda menemukan tempat terbaik. Tanyakan apa saja!</p>
-            </div>
-        </div>
-        <div class="ai-input-area">
-            <input type="text" id="aiInput" placeholder="Tanya AI..." onkeypress="handleAIKeyPress(event)">
-            <button class="ai-send-btn" id="aiSendBtn" onclick="handleAISubmit()">Kirim</button>
-        </div>
+    <div class="empty-state" id="emptyState">
+        <div style="font-size: 4rem; margin-bottom: 1rem;">😕</div>
+        <h3>Tidak ditemukan tempat yang cocok</h3>
+        <p>Coba ubah kata kunci pencarian atau atur ulang filter Anda.</p>
     </div>
 
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
+        <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">×</button>
-            <div class="modal-header" id="modalHeader">
-                <div class="modal-header-overlay">
-                    <h2 id="modalTitle"></h2>
-                    <div class="modal-rating">
-                        <span style="color: #FFD700;">⭐</span>
-                        <span id="modalRating"></span>
-                    </div>
-                </div>
-            </div>
+            <div class="modal-header-img" id="modalImage"></div>
             <div class="modal-body">
-                <p class="modal-desc" id="modalDesc"></p>
-                <div class="modal-info-grid">
-                    <div class="info-box">
-                        <span style="font-size: 1.5rem;">📍</span>
-                        <strong>Jarak</strong>
-                        <p id="modalDistance"></p>
-                    </div>
-                    <div class="info-box">
-                        <span style="font-size: 1.5rem;">💰</span>
-                        <strong>Harga</strong>
-                        <p id="modalPrice"></p>
-                    </div>
-                    <div class="info-box">
-                        <span style="font-size: 1.5rem;">🕐</span>
-                        <strong>Jam Buka</strong>
-                        <p id="modalHours"></p>
-                    </div>
+                <h2 id="modalTitle" style="margin-bottom: 0.5rem; color: #CFFFE0;"></h2>
+                <div style="color: #FFD700; margin-bottom: 1rem; font-weight: bold;">
+                    <span id="modalRating"></span> • <span id="modalPrice"></span>
                 </div>
-                <div class="services-section">
-                    <h4>Paket Sajian</h4>
-                    <div class="services-list" id="modalServices"></div>
+                
+                <div style="margin-bottom: 1rem;" id="modalServices"></div>
+
+                <p id="modalDesc" style="line-height: 1.6; margin-bottom: 1.5rem; color: rgba(255,255,255,0.9);"></p>
+                
+                <div style="background: rgba(10, 30, 22, 0.6); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem; font-size: 0.9rem;">
+                    <div style="margin-bottom: 0.5rem;"><strong>📍 Jarak:</strong> <span id="modalDistance"></span></div>
+                    <div><strong>🕒 Jam Buka:</strong> <span id="modalHours"></span></div>
                 </div>
-                <a href="#" class="btn-primary" id="modalMailto">
-                    📧 Cari di Google
-                </a>
+
+                <a href="#" id="btnGoogle" target="_blank" class="btn-action">🗺️ Buka di Google Maps</a>
             </div>
         </div>
     </div>
 
     <script>
-        // Sample Places Data
+        // --- DATA TEMPAT (Dummy Data) ---
         const places = [
             {
                 id: 1,
                 name: "Emerald Spa & Wellness",
                 category: "spa",
-                lat: -7.8753,
-                lng: 112.0101,
-                price: 150000,
-                rating: 4.8,
+                lat: -7.8753, lng: 112.0101,
+                price: 150000, rating: 4.8,
                 image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400",
-                description: "Spa premium dengan terapi aromaterapi dan massage tradisional",
+                description: "Spa premium dengan terapi aromaterapi dan massage tradisional untuk relaksasi total.",
                 openHours: "09:00-21:00",
                 services: ["Aromatherapy", "Thai Massage", "Facial Treatment"]
             },
@@ -861,25 +427,21 @@
                 id: 2,
                 name: "Warung Nasi Pecel Bu Kaji",
                 category: "food",
-                lat: -7.8723,
-                lng: 112.0145,
-                price: 15000,
-                rating: 4.6,
+                lat: -7.8723, lng: 112.0145,
+                price: 15000, rating: 4.6,
                 image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWTgR0-0OXgnzlpisff5G0eXHmNYdx11TTiA&s",
-                description: "Kuliner lokal autentik dengan cita rasa tradisional",
+                description: "Kuliner lokal autentik dengan cita rasa tradisional. Bumbu kacangnya legendaris.",
                 openHours: "06:00-14:00",
-                services: ["Nasi Pecel", "Rawon", "Soto"]
+                services: ["Nasi Pecel", "Rawon", "Soto Daging"]
             },
             {
                 id: 3,
                 name: "Air Terjun Coban Rondo",
                 category: "tourism",
-                lat: -7.8950,
-                lng: 112.0550,
-                price: 25000,
-                rating: 4.7,
+                lat: -7.8950, lng: 112.0550,
+                price: 25000, rating: 4.7,
                 image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400",
-                description: "Destinasi wisata alam dengan pemandangan air terjun yang menakjubkan",
+                description: "Destinasi wisata alam dengan pemandangan air terjun yang menakjubkan dan udara sejuk.",
                 openHours: "07:00-17:00",
                 services: ["Trekking", "Photography Spot", "Camping Area"]
             },
@@ -887,12 +449,10 @@
                 id: 4,
                 name: "Relaxation Heaven Spa",
                 category: "spa",
-                lat: -7.8800,
-                lng: 112.0200,
-                price: 200000,
-                rating: 4.9,
+                lat: -7.8800, lng: 112.0200,
+                price: 200000, rating: 4.9,
                 image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400",
-                description: "Spa mewah dengan pemandangan gunung",
+                description: "Spa mewah dengan pemandangan gunung, cocok untuk melepas penat.",
                 openHours: "10:00-22:00",
                 services: ["Hot Stone", "Body Scrub", "Jacuzzi"]
             },
@@ -900,60 +460,168 @@
                 id: 5,
                 name: "Sate Kelinci Pak Budi",
                 category: "food",
-                lat: -7.8700,
-                lng: 112.0180,
-                price: 35000,
-                rating: 4.5,
+                lat: -7.8700, lng: 112.0180,
+                price: 35000, rating: 4.5,
                 image: "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=400",
-                description: "Sate kelinci legendaris dengan bumbu kacang spesial",
+                description: "Sate kelinci legendaris dengan bumbu kacang spesial yang gurih dan manis.",
                 openHours: "11:00-21:00",
-                services: ["Sate Kelinci", "Sate Ayam", "Tongseng"]
-            },
-            {
-                id: 6,
-                name: "Taman Rekreasi Selecta",
-                category: "tourism",
-                lat: -7.8650,
-                lng: 112.0480,
-                price: 30000,
-                rating: 4.6,
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIprqBQb-m12QP_O8_ZD1G-U3aI4hwbzPA2w&s",
-                description: "Taman rekreasi keluarga dengan kolam renang dan taman bunga",
-                openHours: "08:00-18:00",
-                services: ["Swimming Pool", "Flower Garden", "Playground"]
-            },
-            {
-                id: 7,
-                name: "Cafe Latte Art",
-                category: "food",
-                lat: -7.8680,
-                lng: 112.0120,
-                price: 45000,
-                rating: 4.7,
-                image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400",
-                description: "Cafe modern dengan kopi specialty dan dessert lezat",
-                openHours: "08:00-22:00",
-                services: ["Coffee", "Dessert", "Breakfast"]
-            },
-            {
-                id: 8,
-                name: "Wellness Center Harmoni",
-                category: "spa",
-                lat: -7.8820,
-                lng: 112.0250,
-                price: 180000,
-                rating: 4.8,
-                image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=400",
-                description: "Pusat wellness dengan yoga dan meditasi",
-                openHours: "07:00-20:00",
-                services: ["Yoga", "Meditation", "Massage"]
+                services: ["Sate Kelinci", "Sate Ayam", "Gule"]
             },
             {
                 id: 17,
                 name: "Monumen Simpang Lima Gumul",
                 category: "tourism",
-                lat: -7.9265,
-                lng: 112.0976,
-                price: 0,
-                rating: 4.7,
-                image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUTEhIWFRUVFRUVFRcXGBUVFhUXFhUWGBcVFxgYHSggGBolHRYVITEhJSkrLi4uFx8zODMtNygtLi0BCgoKDg0OGxAQGy0lHyU3LS0tKy4tLS0tLS0tKy0tLS0tLy0tLS0tLS0tLSstLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAKgBLAMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAACAAEDBQYEB//EAEUQAAEDAgMEBgYIBAQGAwAAAAEAAhEDIQQSMQVBUWEGEyIycZFCUoGhsdEUI1OTwdLh8BUzYpIWouPxByRygtPiQ3Oy/8QAGgEAAgMBAQAAAAAAAAAAAAAAAAECAwUEBv/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/A/
+                lat: -7.9265, lng: 112.0976,
+                price: 0, rating: 4.7,
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Simpang_Lima_Gumul_Monument.jpg/800px-Simpang_Lima_Gumul_Monument.jpg",
+                description: "Monumen ikonik berbentuk seperti Arc de Triomphe Paris, landmark kebanggaan Kediri.",
+                openHours: "24 Jam",
+                services: ["Photo Spot", "Landmark", "Taman"]
+            }
+        ];
+
+        // --- LOGIC ---
+        let userLocation = { lat: -7.8753, lng: 112.0101 }; // Default Location (Pusat Kediri)
+        let filteredPlaces = [];
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Coba dapatkan lokasi pengguna
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        userLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+                        filterPlaces();
+                    },
+                    () => filterPlaces() // Jika gagal, pakai default
+                );
+            } else {
+                filterPlaces();
+            }
+        });
+
+        // Fungsi menghitung jarak (Haversine Formula)
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Radius bumi km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        // Fungsi Utama: Filter & Search
+        function handleSearch() {
+            filterPlaces();
+        }
+
+        function updateFilters() {
+            const radius = document.getElementById('radiusSlider').value;
+            document.getElementById('radiusValue').textContent = radius + ' km';
+            filterPlaces();
+        }
+
+        function filterPlaces() {
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('categorySelect').value;
+            const radiusMax = parseInt(document.getElementById('radiusSlider').value);
+
+            filteredPlaces = places
+                .map(place => ({
+                    ...place,
+                    distance: calculateDistance(userLocation.lat, userLocation.lng, place.lat, place.lng)
+                }))
+                .filter(place => {
+                    // Filter 1: Radius
+                    const isWithinRadius = place.distance <= radiusMax;
+                    
+                    // Filter 2: Kategori
+                    const isCategoryMatch = category === 'all' || place.category === category;
+
+                    // Filter 3: Pencarian Teks (Nama, Deskripsi, Layanan)
+                    const isSearchMatch = 
+                        place.name.toLowerCase().includes(searchQuery) ||
+                        place.description.toLowerCase().includes(searchQuery) ||
+                        place.services.some(service => service.toLowerCase().includes(searchQuery));
+
+                    return isWithinRadius && isCategoryMatch && isSearchMatch;
+                })
+                .sort((a, b) => a.distance - b.distance); // Urutkan terdekat
+
+            renderPlaces();
+        }
+
+        // Render Card ke HTML
+        function renderPlaces() {
+            const grid = document.getElementById('placesGrid');
+            const emptyState = document.getElementById('emptyState');
+
+            if (filteredPlaces.length === 0) {
+                grid.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            grid.innerHTML = filteredPlaces.map(place => {
+                const categoryEmoji = 
+                    place.category === 'spa' ? '💆 Spa' :
+                    place.category === 'food' ? '🍽️ Kuliner' : '🏞️ Wisata';
+
+                return `
+                    <div class="place-card" onclick="openModal(${place.id})">
+                        <div class="card-image" style="background-image: url('${place.image}')">
+                            <div class="category-badge">${categoryEmoji}</div>
+                        </div>
+                        <div class="card-content">
+                            <h3>${place.name}</h3>
+                            <div class="card-info">
+                                <span>⭐ ${place.rating}</span>
+                                <span>📍 ${place.distance.toFixed(1)} km</span>
+                            </div>
+                            <p class="card-desc">${place.description}</p>
+                            <div class="card-footer">
+                                <span class="price">${place.price === 0 ? 'Gratis' : 'Rp ' + place.price.toLocaleString('id-ID')}</span>
+                                <span class="hours">🕐 ${place.openHours}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Modal Functions
+        function openModal(id) {
+            const place = filteredPlaces.find(p => p.id === id);
+            if (!place) return;
+
+            document.getElementById('modalTitle').innerText = place.name;
+            document.getElementById('modalDesc').innerText = place.description;
+            document.getElementById('modalRating').innerText = `⭐ ${place.rating}/5`;
+            document.getElementById('modalPrice').innerText = place.price === 0 ? 'Tiket Gratis' : `Rp ${place.price.toLocaleString('id-ID')}`;
+            document.getElementById('modalDistance').innerText = `${place.distance.toFixed(2)} km dari lokasi Anda`;
+            document.getElementById('modalHours').innerText = place.openHours;
+            
+            // Set Gambar Background Modal
+            document.getElementById('modalImage').style.backgroundImage = `url('${place.image}')`;
+
+            // Services Tags
+            const servicesHtml = place.services.map(s => `<span class="service-tag">${s}</span>`).join('');
+            document.getElementById('modalServices').innerHTML = servicesHtml;
+
+            // Button Google Maps
+            const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${place.lat},${place.lng}`;
+            document.getElementById('btnGoogle').href = mapsUrl;
+
+            document.getElementById('modalOverlay').classList.add('active');
+        }
+
+        function closeModal(event) {
+            if (!event || event.target.id === 'modalOverlay' || event.target.classList.contains('modal-close')) {
+                document.getElementById('modalOverlay').classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
